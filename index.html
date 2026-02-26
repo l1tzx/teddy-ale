@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Preguntas Bien Mexas 😛</title>
+  <title>Preguntas Mexas — L1TZX 😛</title>
   <style>
     :root{
       --bg:#07070d;
-      --card: rgba(255,255,255,.08);
+      --card: rgba(255,255,255,.085);
       --border: rgba(255,255,255,.14);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.68);
       --pink:#ff4d88;
+      --pink2:#ff7fb3;
       --cyan:#22d3ee;
       --purple:#8b5cf6;
+      --shadow: 0 18px 60px rgba(0,0,0,.48);
     }
     *{box-sizing:border-box}
     body{
@@ -47,7 +49,31 @@
       100%{ transform: translateY(-15vh) translateX(40px) scale(1.2); opacity:0; }
     }
 
-    .wrap{ width:min(980px, 92vw); margin:0 auto; padding:56px 0 46px; text-align:center; position:relative; }
+    /* Top corner tag */
+    .corner{
+      position: fixed;
+      top: 12px; left: 12px;
+      z-index: 50;
+      display:flex; align-items:center; gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      font-weight: 900;
+      letter-spacing:.5px;
+    }
+    .corner .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg,var(--pink),var(--cyan));
+      box-shadow: 0 0 18px rgba(255,77,136,.45);
+      animation:pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 50%{ transform:scale(1.35); opacity:1 } }
+
+    .wrap{ width:min(1060px, 92vw); margin:0 auto; padding:62px 0 46px; text-align:center; position:relative; }
+
     .badge{
       display:inline-flex; gap:10px; align-items:center;
       padding:10px 14px; border-radius:999px;
@@ -55,37 +81,53 @@
       backdrop-filter: blur(10px);
       color:var(--muted); font-size:14px;
     }
-    .dot{ width:10px; height:10px; border-radius:999px;
-      background:linear-gradient(135deg,var(--pink),var(--cyan));
-      box-shadow:0 0 18px rgba(255,77,136,.45);
-      animation:pulse 1.4s ease-in-out infinite;
-    }
-    @keyframes pulse { 50%{ transform:scale(1.35); opacity:1 } }
-    h1{ margin:18px 0 6px; font-size: clamp(34px,5.8vw,66px); letter-spacing:-1px; }
-    .sub{ margin:0 0 18px; color:var(--muted); font-size: clamp(14px,2.2vw,18px); }
+    h1{ margin:18px 0 6px; font-size: clamp(34px,5.8vw,70px); letter-spacing:-1px; }
+    .sub{ margin:0 0 16px; color:var(--muted); font-size: clamp(14px,2.2vw,18px); }
 
-    .row{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:14px 0 18px; }
-    button{
+    .mexico{
+      margin: 10px auto 18px;
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(255,77,136,.18));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      animation: pop 1.9s ease-in-out infinite;
+    }
+    @keyframes pop{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-3px) scale(1.02); }
+    }
+
+    .tabs{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin: 14px 0 18px; }
+    .tabbtn{
       border:none; cursor:pointer; user-select:none;
       padding:12px 14px; border-radius:14px;
-      font-weight:800; font-size:14px;
+      font-weight: 900; font-size: 14px;
       transition: transform .12s ease, opacity .12s ease;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
     }
-    button:active{ transform:scale(.98) }
-    .btnA{ background:linear-gradient(135deg,var(--pink),#ff7fb3); color:white; }
-    .btnB{ background:rgba(255,255,255,.08); border:1px solid var(--border); color:var(--text); }
-    .btnC{ background:linear-gradient(135deg,var(--purple),var(--cyan)); color:#041018; }
+    .tabbtn:active{ transform: scale(.98); }
+    .tabbtn.active{
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      border-color: rgba(255,77,136,.35);
+    }
 
     .panel{
       margin: 0 auto;
-      width:min(860px, 100%);
+      width:min(980px, 100%);
       border:1px solid var(--border);
       background: var(--card);
       border-radius:18px;
       padding: 16px;
       text-align:left;
       backdrop-filter: blur(12px);
-      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
@@ -93,24 +135,90 @@
       content:"";
       position:absolute; inset:-2px; pointer-events:none; opacity:.9;
       background:
-        radial-gradient(420px 120px at 30% 0%, rgba(255,77,136,.25), transparent 55%),
-        radial-gradient(420px 120px at 80% 0%, rgba(34,211,238,.18), transparent 55%);
+        radial-gradient(520px 140px at 20% 0%, rgba(255,77,136,.23), transparent 55%),
+        radial-gradient(520px 140px at 85% 0%, rgba(34,211,238,.16), transparent 55%);
     }
     .panel > *{ position:relative; }
-    .big{
-      font-size: clamp(18px,2.3vw,24px);
-      line-height:1.4;
-      margin: 8px 0 10px;
+
+    .toolsRow{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      margin-bottom: 10px;
     }
     .mini{ color:var(--muted); font-size:13px; }
-
-    .pillrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
-    .pill{
-      padding:8px 12px; border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.05);
-      color:var(--muted); font-size:13px;
+    .btn{
+      border:none; cursor:pointer; user-select:none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 13px;
+      transition: transform .12s ease, opacity .12s ease;
     }
+    .btn:active{ transform: scale(.98); }
+    .btnPrimary{ background: linear-gradient(135deg, var(--purple), var(--cyan)); color:#061018; }
+    .btnGhost{ background: rgba(255,255,255,.07); border:1px solid var(--border); color: var(--text); }
+
+    .qgrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (min-width: 900px){
+      .qgrid{ grid-template-columns: 1fr 1fr; }
+    }
+    .qcard{
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.14);
+      border-radius: 16px;
+      padding: 14px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    .qcard:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.22);
+    }
+    .qtitle{
+      font-weight: 900;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    textarea{
+      width: 100%;
+      min-height: 76px;
+      resize: vertical;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      outline: none;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    textarea::placeholder{ color: rgba(255,255,255,.48); }
+
+    .qactions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+      justify-content:flex-end;
+    }
+
+    /* Confetti */
+    .confetti{ position:fixed; inset:0; pointer-events:none; overflow:hidden; display:none; z-index:60; }
+    .confetti.show{ display:block; }
+    .confetti i{
+      position:absolute;
+      width: 9px; height: 14px;
+      border-radius: 3px;
+      top:-20px;
+      opacity:.95;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall{ to{ transform: translateY(110vh) rotate(540deg); opacity:0.9; } }
 
     /* Toast */
     .toast{
@@ -128,6 +236,7 @@
       pointer-events:none;
       font-size:14px;
       box-shadow: 0 20px 70px rgba(0,0,0,.55);
+      z-index: 80;
     }
     .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
@@ -152,40 +261,72 @@
       border-radius:16px;
       display:block;
     }
-    footer{ margin-top:16px; color:rgba(255,255,255,.55); font-size:13px; }
-    a{ color:#ff7fb3; text-decoration:none; }
+
+    /* Music (YouTube) */
+    .musicBox{
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.14);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .musicRow{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;
+      margin-bottom: 10px;
+    }
+    .ytWrap{
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 14px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+    }
+    .ytWrap iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+    }
+
+    footer{ margin-top:16px; color:rgba(255,255,255,.55); font-size:13px; text-align:center; }
+    code{ color: rgba(255,255,255,.8); }
   </style>
 </head>
 <body>
   <div class="gridbg" aria-hidden="true"></div>
   <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
   <div class="toast" id="toast">Listo ✅</div>
 
-  <main class="wrap">
-    <div class="badge"><span class="dot"></span> Preguntas pa’ IG — <b>bien cagadas</b> y <b>bien pasadas</b> 😛</div>
-    <h1>Sticker de Preguntas Mexas</h1>
-    <p class="sub">Pícale a un nivel → te suelta una pregunta. Copia y pégala en tu story 😈</p>
+  <div class="corner"><span class="dot"></span> L1TZX</div>
 
-    <div class="row">
-      <button class="btnA" id="nivelCagado">Nivel bien cagado 😂</button>
-      <button class="btnC" id="nivelCTM">Nivel “anda chinga tu madre” 😈</button>
-      <button class="btnB" id="copiar">Copiar pregunta 📋</button>
-      <button class="btnB" id="random">Random 🎲</button>
+  <main class="wrap">
+    <div class="badge"><span class="dot" style="width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--pink),var(--cyan));"></span> Preguntas pa’ IG + mini juego 🩴</div>
+    <h1>Preguntas Mexas 😛</h1>
+    <p class="sub">Selecciona un nivel → la gente escribe lo que quiera en la caja (open box). Copia y úsalo en tu story.</p>
+
+    <div class="mexico">viva mexico cabrones</div>
+
+    <div class="tabs">
+      <button class="tabbtn active" data-tab="cagado">😂 Nivel bien cagado</button>
+      <button class="tabbtn" data-tab="ctm">😈 Nivel “anda chinga tu madre”</button>
+      <button class="tabbtn" data-tab="confiesa">😛 Confesiones</button>
     </div>
 
-    <section class="panel" aria-label="Pregunta">
-      <div class="mini">Pregunta actual:</div>
-      <div class="big" id="pregunta">Pícale a un nivel pa’ soltar la primera 😛</div>
-      <div class="pillrow">
-        <span class="pill" id="tag">sin nivel</span>
-        <span class="pill">💬 pa’ que contesten</span>
-        <span class="pill">😛 puro cotorreo</span>
+    <section class="panel">
+      <div class="toolsRow">
+        <div class="mini">Tip: puedes copiar una pregunta con un clic y pegarla donde quieras.</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btnPrimary" id="confettiBtn">Confetti 🎉</button>
+          <button class="btn btnGhost" id="randomBtn">Pregunta random 🎲</button>
+        </div>
       </div>
 
+      <div class="qgrid" id="qgrid"></div>
+
       <div class="gameWrap">
-        <div class="mini" style="margin-top:8px;">
-          Mini juego: <b>Esquiva la chancla</b> 🩴 (clic dentro del cuadro para mover tu bolita)
-        </div>
+        <div class="mini"><b>Mini juego:</b> Esquiva la chancla 🩴 (clic dentro del cuadro para mover tu bolita)</div>
 
         <div class="gameHeader">
           <div class="stats">
@@ -193,19 +334,37 @@
             <div class="stat">Récord: <b id="best">0</b></div>
             <div class="stat">Estado: <b id="state">listo</b></div>
           </div>
-          <div class="row" style="margin:0; justify-content:flex-end;">
-            <button class="btnA" id="start">Iniciar juego ▶</button>
-            <button class="btnB" id="reset">Reiniciar ⟲</button>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btnPrimary" id="start">Iniciar ▶</button>
+            <button class="btn btnGhost" id="reset">Reiniciar ⟲</button>
           </div>
         </div>
 
         <canvas id="game" width="900" height="360"></canvas>
-        <div class="mini">Tip: entre más sobrevives, más rápido caen 😮‍💨</div>
+        <div class="mini">Si te pega la chancla = perdiste 💀</div>
+      </div>
+
+      <div class="musicBox">
+        <div class="musicRow">
+          <div class="mini"><b>Música:</b> Grupo Frontera, Fuerza Regida — COQUETA</div>
+          <div class="mini">Si no suena, dale play (autoplay a veces se bloquea).</div>
+        </div>
+
+        <!-- YouTube embed (no lyrics text) -->
+        <div class="ytWrap">
+          <!-- NOTE: Autoplay may be blocked. -->
+          <iframe
+            src="https://www.youtube.com/embed/5mVY3x8wz1U?autoplay=0&mute=0&controls=1&rel=0"
+            title="COQUETA - Grupo Frontera, Fuerza Regida"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
       </div>
     </section>
 
     <footer>
-      Si quieres meter imágenes: súbelas al repo en una carpeta <b>assets</b> y las jalamos con <code>assets/tuFoto.jpg</code>.
+      Hecho por <b>Teddy (Felix)</b> — <code>L1TZX</code> 😛
     </footer>
   </main>
 
@@ -232,51 +391,159 @@
     setTimeout(()=>toast.classList.remove("show"), 1400);
   }
 
-  // Questions
-  const cagado = [
-    "¿Quién es más probable que diga “yo no fui” y sí fue? 😂",
-    "¿Quién se duerme primero en el peda? 😴",
-    "¿Quién es más mandilón y todavía lo niega? 🥴",
-    "¿Quién se hace el interesante pero contesta en 2 segundos? 📲",
-    "¿Quién parece inocente pero es bien diabl@? 😈",
-    "¿Quién se ríe de todo aunque ni entendió? 🤡",
-    "¿Quién es más dramático/a por cualquier cosita? 🎭",
-    "¿Quién es el/la más chismoso/a nivel tía? 🗣️",
-    "¿Quién es más probable que se pierda en su propia colonia? 🧭",
-    "¿Quién dice “ahorita” y aparece en 3 días? 😭"
-  ];
+  // Confetti
+  const confetti = document.getElementById("confetti");
+  function confettiBoom(){
+    confetti.classList.add("show");
+    confetti.innerHTML = "";
+    const colors = [
+      "rgba(255,77,136,.95)",
+      "rgba(255,127,179,.95)",
+      "rgba(34,211,238,.95)",
+      "rgba(139,92,246,.95)",
+      "rgba(255,255,255,.85)"
+    ];
+    for(let i=0;i<140;i++){
+      const c = document.createElement("i");
+      c.style.left = (Math.random()*100) + "vw";
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.animationDuration = (1.9 + Math.random()*1.8) + "s";
+      c.style.animationDelay = (Math.random()*0.15) + "s";
+      confetti.appendChild(c);
+    }
+    setTimeout(()=>{
+      confetti.classList.remove("show");
+      confetti.innerHTML = "";
+    }, 2400);
+  }
+  document.getElementById("confettiBtn").onclick = () => { confettiBoom(); showToast("Viva México 😛"); };
 
-  const ctm = [
-    "¿Quién ocupa que lo manden a chingar a su madre (con cariño)? 😈",
-    "¿Quién se cree mucho y no trae con qué? 💀",
-    "¿Quién habla un chingo y dice pura pendejada? 😂",
-    "¿Quién debe dinero y se hace bien pendejo? 💸",
-    "¿Quién sería el primero en venderte por unos tacos? 🌮",
-    "¿Quién se hace la víctima pero es el problema? 🫠",
-    "¿Quién promete “cambio” y sale peor? 🤡",
-    "¿Quién se la vive de ‘yo no fui’ pero siempre es? 😭",
-    "¿Quién te cae bien… pero también chinga tu madre? 😛",
-    "¿Quién necesita un reality check URGENTE? 🧠"
-  ];
+  // Questions (your exact list)
+  const DATA = {
+    cagado: [
+      "¿Quién es el más castroso pero lo quieres?",
+      "¿Quién dice “ahorita” y aparece en 3 días?",
+      "¿Quién se hace el interesante pero contesta en 2 segundos?",
+      "¿Quién se ríe de todo aunque ni entendió?",
+      "¿Quién es más dramático por cualquier cosita?",
+      "¿Quién es el más chismoso nivel tía?",
+      "¿Quién se pierde en su propia colonia?",
+      "¿Quién siempre llega tarde y todavía se enoja?",
+      "¿Quién es el más probable que diga “yo no fui”… y sí fue?",
+      "¿Quién es bien mentiroso pa’ la peda?"
+    ],
+    ctm: [
+      "¿A quién le dirías “anda chinga tu madre” (con cariño)?",
+      "¿Quién se cree mucho y no trae con qué?",
+      "¿Quién habla un chingo y dice pura mamada?",
+      "¿Quién debe feria y se hace pendejo?",
+      "¿Quién necesita un reality check urgente?",
+      "¿Quién es bien doble cara pero se hace el santo?",
+      "¿Quién te cae bien… pero también chinga tu madre?",
+      "¿Quién es puro verbo y nada de acción?",
+      "¿Quién es bien tóxico y todavía lo niega?",
+      "¿Quién es el más probable que te deje en visto y luego pida favor?"
+    ],
+    confiesa: [
+      "Dime un chisme pero sin nombres 😛",
+      "Confiesa algo que te dé pena (nadie juzga)",
+      "¿A quién extrañas pero te haces el fuerte?",
+      "¿Quién te gusta pero no te atreves?"
+    ]
+  };
 
-  const preguntaEl = document.getElementById("pregunta");
-  const tagEl = document.getElementById("tag");
+  // Build cards
+  const qgrid = document.getElementById("qgrid");
+  let currentTab = "cagado";
 
-  function pick(arr, tag){
-    const q = arr[Math.floor(Math.random()*arr.length)];
-    preguntaEl.textContent = q;
-    tagEl.textContent = tag;
-    showToast("Listo pa’ tu story 😛");
+  function makeCard(q, idx){
+    const wrap = document.createElement("div");
+    wrap.className = "qcard";
+
+    const title = document.createElement("div");
+    title.className = "qtitle";
+    title.textContent = q;
+
+    const ta = document.createElement("textarea");
+    ta.placeholder = "Escribe aquí lo que sea… (open box)";
+
+    // Save draft locally so user doesn’t lose it
+    const key = `draft_${currentTab}_${idx}`;
+    ta.value = localStorage.getItem(key) || "";
+    ta.addEventListener("input", ()=> localStorage.setItem(key, ta.value));
+
+    const actions = document.createElement("div");
+    actions.className = "qactions";
+
+    const b1 = document.createElement("button");
+    b1.className = "btn btnGhost";
+    b1.textContent = "Copiar pregunta";
+    b1.onclick = async ()=>{
+      try{
+        await navigator.clipboard.writeText(q);
+        showToast("Pregunta copiada 📋");
+      }catch(e){
+        showToast("No se pudo copiar 😅");
+      }
+    };
+
+    const b2 = document.createElement("button");
+    b2.className = "btn btnPrimary";
+    b2.textContent = "Copiar mi respuesta";
+    b2.onclick = async ()=>{
+      const text = ta.value.trim();
+      if(!text){ showToast("Primero escribe algo 😛"); return; }
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("Respuesta copiada ✅");
+      }catch(e){
+        showToast("No se pudo copiar 😅");
+      }
+    };
+
+    const b3 = document.createElement("button");
+    b3.className = "btn btnGhost";
+    b3.textContent = "Limpiar";
+    b3.onclick = ()=>{
+      ta.value = "";
+      localStorage.removeItem(key);
+      showToast("Listo 🧽");
+    };
+
+    actions.appendChild(b1);
+    actions.appendChild(b2);
+    actions.appendChild(b3);
+
+    wrap.appendChild(title);
+    wrap.appendChild(ta);
+    wrap.appendChild(actions);
+    return wrap;
   }
 
-  document.getElementById("nivelCagado").onclick = () => pick(cagado, "nivel bien cagado 😂");
-  document.getElementById("nivelCTM").onclick = () => pick(ctm, "nivel CTM 😈");
-  document.getElementById("random").onclick = () => pick((Math.random()>0.5?cagado:ctm), "random 🎲");
+  function render(tab){
+    currentTab = tab;
+    qgrid.innerHTML = "";
+    DATA[tab].forEach((q, i)=> qgrid.appendChild(makeCard(q, i)));
+  }
 
-  document.getElementById("copiar").onclick = async () => {
+  // Tabs
+  document.querySelectorAll(".tabbtn").forEach(btn=>{
+    btn.onclick = ()=>{
+      document.querySelectorAll(".tabbtn").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      render(btn.dataset.tab);
+      showToast("Cambiado de nivel 😈");
+    };
+  });
+
+  // Random question: copy it immediately
+  document.getElementById("randomBtn").onclick = async ()=>{
+    const tabs = ["cagado","ctm","confiesa"];
+    const tab = tabs[Math.floor(Math.random()*tabs.length)];
+    const q = DATA[tab][Math.floor(Math.random()*DATA[tab].length)];
     try{
-      await navigator.clipboard.writeText(preguntaEl.textContent);
-      showToast("Copiado 📋");
+      await navigator.clipboard.writeText(q);
+      showToast("Random copiado 📋");
     }catch(e){
       showToast("No se pudo copiar 😅");
     }
@@ -291,7 +558,7 @@
   let best = Number(localStorage.getItem("best_chancla") || 0);
   document.getElementById("best").textContent = best;
 
-  const player = { x: 120, y: canvas.height-70, r: 16, vx:0 };
+  const player = { x: 120, y: canvas.height-70, r: 16 };
   let slippers = [];
   let spawnTimer = 0;
   let speed = 2.6;
@@ -323,6 +590,7 @@
       localStorage.setItem("best_chancla", String(best));
       document.getElementById("best").textContent = best;
       showToast("Nuevo récord 🔥");
+      confettiBoom();
     } else {
       showToast("Te cayó la chancla 🩴💀");
     }
@@ -343,7 +611,6 @@
   function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    // glow ground
     const g = ctx.createLinearGradient(0,canvas.height-90,0,canvas.height);
     g.addColorStop(0,"rgba(255,77,136,.0)");
     g.addColorStop(1,"rgba(255,77,136,.12)");
@@ -363,7 +630,6 @@
       ctx.rotate(s.rot * (s.y/40));
       ctx.fillStyle = "rgba(255,255,255,.88)";
       ctx.fillRect(-s.w/2, -s.h/2, s.w, s.h);
-      // tiny strap
       ctx.strokeStyle = "rgba(255,77,136,.9)";
       ctx.lineWidth = 3;
       ctx.beginPath();
@@ -374,7 +640,6 @@
       ctx.restore();
     }
 
-    // hud
     ctx.fillStyle = "rgba(255,255,255,.55)";
     ctx.font = "14px system-ui";
     ctx.fillText("Clic dentro del cuadro para mover", 14, 22);
@@ -386,29 +651,25 @@
     const dt = Math.min(32, t-last);
     last = t;
 
-    // spawn
     spawnTimer += dt;
-    const interval = Math.max(280, 900 - score*10); // faster as score increases
+    const interval = Math.max(280, 900 - score*10);
     if(spawnTimer > interval){
       spawnTimer = 0;
       spawn();
     }
 
-    // update slippers
     for(const s of slippers){
       s.y += s.vy * (dt/16);
       s.vy += 0.02 * (dt/16);
     }
     slippers = slippers.filter(s => s.y < canvas.height + 40);
 
-    // score up over time
     if(Math.random() < 0.06) {
       score += 1;
       document.getElementById("score").textContent = score;
       speed = 2.6 + score*0.02;
     }
 
-    // collision
     for(const s of slippers){
       const rx = s.x - s.w/2, ry = s.y - s.h/2;
       if(collideRectCircle(rx, ry, s.w, s.h, player.x, player.y, player.r)){
@@ -430,7 +691,8 @@
   document.getElementById("start").onclick = startGame;
   document.getElementById("reset").onclick = resetGame;
 
-  // initial draw
+  // Initial
+  render("cagado");
   resetGame();
 </script>
 </body>
