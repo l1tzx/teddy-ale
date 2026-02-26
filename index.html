@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Preguntas Mexas — L1TZX 😛</title>
+  <title>OMGL1TZX — México Quest 🐍🇲🇽</title>
   <style>
     :root{
-      --bg:#07070d;
+      --bg:#06060c;
       --card: rgba(255,255,255,.085);
       --border: rgba(255,255,255,.14);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.68);
       --pink:#ff4d88;
-      --pink2:#ff7fb3;
       --cyan:#22d3ee;
       --purple:#8b5cf6;
       --shadow: 0 18px 60px rgba(0,0,0,.48);
@@ -30,30 +29,43 @@
         var(--bg);
       overflow-x:hidden;
     }
+
     .gridbg{
-      position:fixed; inset:0; pointer-events:none; opacity:.45;
+      position:fixed; inset:0; pointer-events:none; opacity:.42;
       background-image:
         linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
       background-size: 52px 52px;
-      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 62%);
+      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
       animation: drift 10s linear infinite;
     }
     @keyframes drift { to { transform: translate3d(52px,52px,0); } }
 
-    .float-layer{ position:fixed; inset:0; pointer-events:none; opacity:.6; filter:drop-shadow(0 10px 16px rgba(0,0,0,.55)); }
-    .float{ position:absolute; transform: translateY(110vh); user-select:none; animation: floatUp linear infinite; }
-    @keyframes floatUp{
-      0%{ transform: translateY(110vh) translateX(0) scale(.9); opacity:0; }
-      12%{ opacity:1; }
-      100%{ transform: translateY(-15vh) translateX(40px) scale(1.2); opacity:0; }
+    /* background slang words */
+    .slang{
+      position:fixed; inset:0; pointer-events:none; opacity:.23; z-index:0;
+      overflow:hidden;
+    }
+    .slang span{
+      position:absolute;
+      font-weight:900;
+      letter-spacing:.8px;
+      color: rgba(255,255,255,.35);
+      text-transform: uppercase;
+      animation: floatWords linear infinite;
+      filter: drop-shadow(0 18px 30px rgba(0,0,0,.55));
+      user-select:none;
+      white-space:nowrap;
+    }
+    @keyframes floatWords{
+      0%{ transform: translateY(110vh) translateX(0) rotate(-2deg); opacity:0; }
+      15%{ opacity:1; }
+      100%{ transform: translateY(-20vh) translateX(60px) rotate(2deg); opacity:0; }
     }
 
-    /* Top corner tag */
+    /* top corner name */
     .corner{
-      position: fixed;
-      top: 12px; left: 12px;
-      z-index: 50;
+      position: fixed; top: 12px; left: 12px; z-index: 50;
       display:flex; align-items:center; gap:10px;
       padding: 10px 12px;
       border-radius: 999px;
@@ -62,7 +74,7 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 12px 40px rgba(0,0,0,.35);
       font-weight: 900;
-      letter-spacing:.5px;
+      letter-spacing:.6px;
     }
     .corner .dot{
       width:10px; height:10px; border-radius:999px;
@@ -72,7 +84,14 @@
     }
     @keyframes pulse { 50%{ transform:scale(1.35); opacity:1 } }
 
-    .wrap{ width:min(1060px, 92vw); margin:0 auto; padding:62px 0 46px; text-align:center; position:relative; }
+    .wrap{
+      width:min(1080px, 92vw);
+      margin:0 auto;
+      padding:62px 0 46px;
+      position:relative;
+      z-index:1;
+      text-align:center;
+    }
 
     .badge{
       display:inline-flex; gap:10px; align-items:center;
@@ -81,11 +100,12 @@
       backdrop-filter: blur(10px);
       color:var(--muted); font-size:14px;
     }
-    h1{ margin:18px 0 6px; font-size: clamp(34px,5.8vw,70px); letter-spacing:-1px; }
+
+    h1{ margin:18px 0 6px; font-size: clamp(34px,5.8vw,72px); letter-spacing:-1px; }
     .sub{ margin:0 0 16px; color:var(--muted); font-size: clamp(14px,2.2vw,18px); }
 
-    .mexico{
-      margin: 10px auto 18px;
+    .viva{
+      margin: 10px auto 16px;
       width: fit-content;
       padding: 10px 14px;
       border-radius: 14px;
@@ -94,29 +114,10 @@
       box-shadow: 0 14px 40px rgba(0,0,0,.35);
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: .8px;
+      letter-spacing: .9px;
       animation: pop 1.9s ease-in-out infinite;
     }
-    @keyframes pop{
-      0%,100%{ transform: translateY(0); }
-      50%{ transform: translateY(-3px) scale(1.02); }
-    }
-
-    .tabs{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin: 14px 0 18px; }
-    .tabbtn{
-      border:none; cursor:pointer; user-select:none;
-      padding:12px 14px; border-radius:14px;
-      font-weight: 900; font-size: 14px;
-      transition: transform .12s ease, opacity .12s ease;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-    }
-    .tabbtn:active{ transform: scale(.98); }
-    .tabbtn.active{
-      background: linear-gradient(135deg, var(--pink), var(--pink2));
-      border-color: rgba(255,77,136,.35);
-    }
+    @keyframes pop{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-3px) scale(1.02);} }
 
     .panel{
       margin: 0 auto;
@@ -140,85 +141,128 @@
     }
     .panel > *{ position:relative; }
 
-    .toolsRow{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      margin-bottom: 10px;
+    .row{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin: 10px 0 12px;
     }
-    .mini{ color:var(--muted); font-size:13px; }
     .btn{
       border:none; cursor:pointer; user-select:none;
-      padding: 10px 12px;
-      border-radius: 12px;
+      padding: 11px 13px;
+      border-radius: 14px;
       font-weight: 900;
       font-size: 13px;
       transition: transform .12s ease, opacity .12s ease;
     }
-    .btn:active{ transform: scale(.98); }
-    .btnPrimary{ background: linear-gradient(135deg, var(--purple), var(--cyan)); color:#061018; }
-    .btnGhost{ background: rgba(255,255,255,.07); border:1px solid var(--border); color: var(--text); }
+    .btn:active{ transform:scale(.98) }
+    .btnA{ background: linear-gradient(135deg, var(--pink), #ff7fb3); color:white; }
+    .btnB{ background: rgba(255,255,255,.07); border:1px solid var(--border); color:var(--text); }
+    .btnC{ background: linear-gradient(135deg, var(--purple), var(--cyan)); color:#061018; }
 
-    .qgrid{
-      display:grid;
+    .quest{
+      display:grid; gap:12px; margin-top: 8px;
       grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 10px;
     }
-    @media (min-width: 900px){
-      .qgrid{ grid-template-columns: 1fr 1fr; }
-    }
-    .qcard{
+    @media(min-width:920px){ .quest{ grid-template-columns: 1.1fr .9fr; } }
+
+    .card{
       border:1px solid var(--border);
       background: rgba(0,0,0,.14);
       border-radius: 16px;
       padding: 14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .card h3{ margin:0 0 6px; }
+    .mini{ color:var(--muted); font-size:13px; line-height:1.4; }
+
+    /* Meme card */
+    .memeBox{
+      display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      padding: 12px;
+      border-radius: 14px;
+      margin-top: 10px;
+    }
+    .memeArt{
+      flex: 1 1 280px;
+      min-height: 120px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(380px 120px at 20% 30%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(380px 120px at 80% 30%, rgba(255,77,136,.18), transparent 60%),
+        rgba(0,0,0,.18);
+      display:flex; align-items:center; justify-content:center;
+      font-size: 56px;
       position:relative;
       overflow:hidden;
-      transition: transform .12s ease, border-color .12s ease;
+      cursor:pointer;
+      transition: transform .12s ease;
     }
-    .qcard:hover{
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.22);
-    }
-    .qtitle{
+    .memeArt:active{ transform: scale(.98); }
+    .memeArt:after{
+      content:"PICA AQUÍ";
+      position:absolute;
+      bottom: 10px; right: 12px;
       font-weight: 900;
-      margin-bottom: 10px;
+      letter-spacing: 1px;
+      font-size: 12px;
+      color: rgba(255,255,255,.7);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(10px);
+    }
+    .memeText{
+      flex: 1 1 260px;
+      font-weight: 900;
+      font-size: 14px;
       line-height: 1.35;
     }
-    textarea{
-      width: 100%;
-      min-height: 76px;
-      resize: vertical;
+    .memeText .tiny{ display:block; margin-top:6px; font-weight:700; color: rgba(255,255,255,.68); }
+
+    /* Snake game box */
+    canvas{
+      width:100%;
+      height: 360px;
+      background: rgba(0,0,0,.18);
+      border:2px solid rgba(255,255,255,.2);
+      border-radius:16px;
+      display:block;
+    }
+    .stats{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;
+    }
+    .stat{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+      border-radius: 14px;
       padding: 10px 12px;
-      border-radius: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .stat b{ color: var(--text); }
+
+    /* Music */
+    .musicBox{
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .ytWrap{
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 14px;
+      overflow:hidden;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.05);
-      color: var(--text);
-      outline: none;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-    textarea::placeholder{ color: rgba(255,255,255,.48); }
-
-    .qactions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
       margin-top: 10px;
-      justify-content:flex-end;
     }
-
-    /* Confetti */
-    .confetti{ position:fixed; inset:0; pointer-events:none; overflow:hidden; display:none; z-index:60; }
-    .confetti.show{ display:block; }
-    .confetti i{
-      position:absolute;
-      width: 9px; height: 14px;
-      border-radius: 3px;
-      top:-20px;
-      opacity:.95;
-      animation: confettiFall linear forwards;
-    }
-    @keyframes confettiFall{ to{ transform: translateY(110vh) rotate(540deg); opacity:0.9; } }
+    .ytWrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 
     /* Toast */
     .toast{
@@ -240,460 +284,389 @@
     }
     .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
-    /* Mini game */
-    .gameWrap{ margin-top:16px; display:grid; gap:12px; }
-    .gameHeader{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; }
-    .stats{ display:flex; gap:10px; flex-wrap:wrap; }
-    .stat{
-      border:1px solid var(--border);
-      background:rgba(0,0,0,.14);
-      border-radius:14px;
-      padding:10px 12px;
-      font-size:13px;
-      color:var(--muted);
+    /* Confetti */
+    .fx{ position:fixed; inset:0; pointer-events:none; overflow:hidden; display:none; z-index:60; }
+    .fx.show{ display:block; }
+    .fx i{
+      position:absolute;
+      width: 9px; height: 14px;
+      border-radius: 3px;
+      top:-20px;
+      opacity:.95;
+      animation: fall linear forwards;
     }
-    .stat b{ color:var(--text); }
-    canvas{
-      width:100%;
-      height: 360px;
-      background: rgba(0,0,0,.18);
-      border:1px solid var(--border);
-      border-radius:16px;
-      display:block;
-    }
+    @keyframes fall{ to{ transform: translateY(110vh) rotate(540deg); opacity:0.9; } }
 
-    /* Music (YouTube) */
-    .musicBox{
-      margin-top: 14px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,.14);
+    /* Secret image modal */
+    #secretModal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.7);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 90;
+      backdrop-filter: blur(8px);
+    }
+    #secretModal.show{ display:flex; }
+    #secretModal .box{
+      width:min(520px, 92vw);
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.35);
       border-radius: 16px;
       padding: 12px;
+      text-align:center;
+      box-shadow: 0 30px 120px rgba(0,0,0,.7);
     }
-    .musicRow{
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;
-      margin-bottom: 10px;
-    }
-    .ytWrap{
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
+    #secretModal img{
+      width:100%;
       border-radius: 14px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.14);
+      display:block;
     }
-    .ytWrap iframe{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      border:0;
+    #secretModal .cap{
+      margin-top:10px;
+      font-weight:900;
+      color: rgba(255,255,255,.86);
+    }
+
+    /* Hidden “hotspot” */
+    .secretHotspot{
+      position:absolute;
+      width: 18px; height: 18px;
+      right: 10px; top: 10px;
+      opacity: 0.02; /* basically invisible */
+      cursor: pointer;
+      border-radius: 999px;
+      background: white;
     }
 
     footer{ margin-top:16px; color:rgba(255,255,255,.55); font-size:13px; text-align:center; }
-    code{ color: rgba(255,255,255,.8); }
   </style>
 </head>
 <body>
   <div class="gridbg" aria-hidden="true"></div>
-  <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
-  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="slang" id="slang" aria-hidden="true"></div>
+
+  <div class="fx" id="fx" aria-hidden="true"></div>
   <div class="toast" id="toast">Listo ✅</div>
 
-  <div class="corner"><span class="dot"></span> L1TZX</div>
+  <div class="corner"><span class="dot"></span> OMGL1TZX</div>
 
-  <main class="wrap">
-    <div class="badge"><span class="dot" style="width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--pink),var(--cyan));"></span> Preguntas pa’ IG + mini juego 🩴</div>
-    <h1>Preguntas Mexas 😛</h1>
-    <p class="sub">Selecciona un nivel → la gente escribe lo que quiera en la caja (open box). Copia y úsalo en tu story.</p>
-
-    <div class="mexico">viva mexico cabrones</div>
-
-    <div class="tabs">
-      <button class="tabbtn active" data-tab="cagado">😂 Nivel bien cagado</button>
-      <button class="tabbtn" data-tab="ctm">😈 Nivel “anda chinga tu madre”</button>
-      <button class="tabbtn" data-tab="confiesa">😛 Confesiones</button>
+  <!-- Secret Modal -->
+  <div id="secretModal" onclick="this.classList.remove('show')">
+    <div class="box" onclick="event.stopPropagation()">
+      <img src="assets/secret.jpg" alt="secret">
+      <div class="cap">Encontraste el secreto 😛🇲🇽</div>
+      <div class="mini" style="text-align:center;margin-top:6px;">(clic afuera para cerrar)</div>
     </div>
+  </div>
 
-    <section class="panel">
-      <div class="toolsRow">
-        <div class="mini">Tip: puedes copiar una pregunta con un clic y pegarla donde quieras.</div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn btnPrimary" id="confettiBtn">Confetti 🎉</button>
-          <button class="btn btnGhost" id="randomBtn">Pregunta random 🎲</button>
-        </div>
+  <main class="wrap" id="wrap">
+    <div class="badge"><span class="dot" style="width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--pink),var(--cyan));"></span> México Quest: cotorreo + snake 🐍</div>
+    <h1>México Quest 🇲🇽</h1>
+    <p class="sub">Pica cosas → salen mensajes → confetti → y el snake se pone más cabrón 😈</p>
+    <div class="viva">VIVA MÉXICO</div>
+
+    <section class="panel" style="position:relative;">
+      <!-- Hidden hotspot (top-right of panel) -->
+      <div class="secretHotspot" id="secretHotspot" title="👀"></div>
+
+      <div class="row">
+        <button class="btn btnA" id="btnLoot">Abrir loot 🎁</button>
+        <button class="btn btnB" id="btnMsg">Mensaje random 💬</button>
+        <button class="btn btnC" id="btnBoom">Confetti 🎉</button>
       </div>
 
-      <div class="qgrid" id="qgrid"></div>
+      <div class="quest">
+        <div class="card">
+          <h3>📸 Meme México</h3>
+          <div class="mini">Pícale al meme para cambiarlo. Y hay un secreto escondido en esta página 👀</div>
 
-      <div class="gameWrap">
-        <div class="mini"><b>Mini juego:</b> Esquiva la chancla 🩴 (clic dentro del cuadro para mover tu bolita)</div>
+          <div class="memeBox">
+            <div class="memeArt" id="memeArt">🇲🇽😂</div>
+            <div class="memeText" id="memeText">
+              “Cuando dices <b>‘ahorita’</b>… y se convierte en mañana” 😭
+              <span class="tiny">Pícale para que cambie y suelte frases.</span>
+            </div>
+          </div>
 
-        <div class="gameHeader">
+          <div class="mini" style="margin-top:10px;">
+            Frases de fondo tipo México: <b>“NO MAMES”</b>, <b>“QUE PEDO”</b>, <b>“NI MODO”</b>… (se mueven solas) 😛
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🐍 Snake en Caja (muere si toca pared)</h3>
+          <div class="mini">Flechas (↑ ↓ ← →). Come cajitas 📦. Creces. Si tocas la pared = 💀</div>
+
+          <canvas id="snake" width="900" height="360"></canvas>
+
           <div class="stats">
             <div class="stat">Puntos: <b id="score">0</b></div>
             <div class="stat">Récord: <b id="best">0</b></div>
             <div class="stat">Estado: <b id="state">listo</b></div>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="btn btnPrimary" id="start">Iniciar ▶</button>
-            <button class="btn btnGhost" id="reset">Reiniciar ⟲</button>
+
+          <div class="row" style="justify-content:flex-start;">
+            <button class="btn btnC" id="playSnake">Jugar ▶</button>
+            <button class="btn btnB" id="resetSnake">Reiniciar ⟲</button>
           </div>
-        </div>
 
-        <canvas id="game" width="900" height="360"></canvas>
-        <div class="mini">Si te pega la chancla = perdiste 💀</div>
-      </div>
+          <div class="musicBox">
+            <div class="mini"><b>Música:</b> Grupo Frontera, Fuerza Regida — COQUETA (Letra Oficial)</div>
+            <div class="mini">Si el navegador bloquea autoplay, dale play manual.</div>
+            <div class="ytWrap">
+              <iframe
+                src="https://www.youtube.com/embed/nNUiVCKu_9Y?autoplay=0&mute=0&controls=1&rel=0"
+                title="COQUETA - Grupo Frontera, Fuerza Regida"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
 
-      <div class="musicBox">
-        <div class="musicRow">
-          <div class="mini"><b>Música:</b> Grupo Frontera, Fuerza Regida — COQUETA</div>
-          <div class="mini">Si no suena, dale play (autoplay a veces se bloquea).</div>
-        </div>
-
-        <!-- YouTube embed (no lyrics text) -->
-        <div class="ytWrap">
-          <!-- NOTE: Autoplay may be blocked. -->
-          <iframe
-            src="https://www.youtube.com/embed/5mVY3x8wz1U?autoplay=0&mute=0&controls=1&rel=0"
-            title="COQUETA - Grupo Frontera, Fuerza Regida"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
         </div>
       </div>
     </section>
 
     <footer>
-      Hecho por <b>Teddy (Felix)</b> — <code>L1TZX</code> 😛
+      Hecho por <b>OMGL1TZX</b> — viva México 😛🇲🇽
     </footer>
   </main>
 
-<script>
-  // Floating emojis
-  const floatLayer = document.getElementById("floatLayer");
-  const floatEmojis = ["😂","😈","😛","💀","🩴","🌮","🔥","💬","🤡","🧠","🧃"];
-  for(let i=0;i<26;i++){
-    const el = document.createElement("div");
-    el.className = "float";
-    el.textContent = floatEmojis[Math.floor(Math.random()*floatEmojis.length)];
-    el.style.left = (Math.random()*100) + "vw";
-    el.style.animationDuration = (6 + Math.random()*10) + "s";
-    el.style.animationDelay = (Math.random()*8) + "s";
-    el.style.fontSize = (14 + Math.random()*22) + "px";
-    floatLayer.appendChild(el);
-  }
-
-  // Toast
-  const toast = document.getElementById("toast");
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.classList.add("show");
-    setTimeout(()=>toast.classList.remove("show"), 1400);
-  }
-
-  // Confetti
-  const confetti = document.getElementById("confetti");
-  function confettiBoom(){
-    confetti.classList.add("show");
-    confetti.innerHTML = "";
-    const colors = [
-      "rgba(255,77,136,.95)",
-      "rgba(255,127,179,.95)",
-      "rgba(34,211,238,.95)",
-      "rgba(139,92,246,.95)",
-      "rgba(255,255,255,.85)"
+  <script>
+    // Slang background
+    const slangWords = [
+      "NO MAMES","AHORITA","ALV","WEY","CHIDO","QUE PEDO",
+      "SIMÓN","NEL","A LA VERGA","TIRA PARO","YA MERITO",
+      "PURO COTORREO","TA' CABRÓN","NI MODO","YA VALIÓ"
     ];
-    for(let i=0;i<140;i++){
-      const c = document.createElement("i");
-      c.style.left = (Math.random()*100) + "vw";
-      c.style.background = colors[Math.floor(Math.random()*colors.length)];
-      c.style.animationDuration = (1.9 + Math.random()*1.8) + "s";
-      c.style.animationDelay = (Math.random()*0.15) + "s";
-      confetti.appendChild(c);
+    const slang = document.getElementById("slang");
+    for(let i=0;i<26;i++){
+      const sp = document.createElement("span");
+      sp.textContent = slangWords[Math.floor(Math.random()*slangWords.length)];
+      sp.style.left = (Math.random()*100) + "vw";
+      sp.style.animationDuration = (7 + Math.random()*12) + "s";
+      sp.style.animationDelay = (Math.random()*8) + "s";
+      sp.style.fontSize = (12 + Math.random()*22) + "px";
+      slang.appendChild(sp);
     }
-    setTimeout(()=>{
-      confetti.classList.remove("show");
-      confetti.innerHTML = "";
-    }, 2400);
-  }
-  document.getElementById("confettiBtn").onclick = () => { confettiBoom(); showToast("Viva México 😛"); };
 
-  // Questions (your exact list)
-  const DATA = {
-    cagado: [
-      "¿Quién es el más castroso pero lo quieres?",
-      "¿Quién dice “ahorita” y aparece en 3 días?",
-      "¿Quién se hace el interesante pero contesta en 2 segundos?",
-      "¿Quién se ríe de todo aunque ni entendió?",
-      "¿Quién es más dramático por cualquier cosita?",
-      "¿Quién es el más chismoso nivel tía?",
-      "¿Quién se pierde en su propia colonia?",
-      "¿Quién siempre llega tarde y todavía se enoja?",
-      "¿Quién es el más probable que diga “yo no fui”… y sí fue?",
-      "¿Quién es bien mentiroso pa’ la peda?"
-    ],
-    ctm: [
-      "¿A quién le dirías “anda chinga tu madre” (con cariño)?",
-      "¿Quién se cree mucho y no trae con qué?",
-      "¿Quién habla un chingo y dice pura mamada?",
-      "¿Quién debe feria y se hace pendejo?",
-      "¿Quién necesita un reality check urgente?",
-      "¿Quién es bien doble cara pero se hace el santo?",
-      "¿Quién te cae bien… pero también chinga tu madre?",
-      "¿Quién es puro verbo y nada de acción?",
-      "¿Quién es bien tóxico y todavía lo niega?",
-      "¿Quién es el más probable que te deje en visto y luego pida favor?"
-    ],
-    confiesa: [
-      "Dime un chisme pero sin nombres 😛",
-      "Confiesa algo que te dé pena (nadie juzga)",
-      "¿A quién extrañas pero te haces el fuerte?",
-      "¿Quién te gusta pero no te atreves?"
-    ]
-  };
+    // Toast
+    const toast = document.getElementById("toast");
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(()=>toast.classList.remove("show"), 1400);
+    }
 
-  // Build cards
-  const qgrid = document.getElementById("qgrid");
-  let currentTab = "cagado";
-
-  function makeCard(q, idx){
-    const wrap = document.createElement("div");
-    wrap.className = "qcard";
-
-    const title = document.createElement("div");
-    title.className = "qtitle";
-    title.textContent = q;
-
-    const ta = document.createElement("textarea");
-    ta.placeholder = "Escribe aquí lo que sea… (open box)";
-
-    // Save draft locally so user doesn’t lose it
-    const key = `draft_${currentTab}_${idx}`;
-    ta.value = localStorage.getItem(key) || "";
-    ta.addEventListener("input", ()=> localStorage.setItem(key, ta.value));
-
-    const actions = document.createElement("div");
-    actions.className = "qactions";
-
-    const b1 = document.createElement("button");
-    b1.className = "btn btnGhost";
-    b1.textContent = "Copiar pregunta";
-    b1.onclick = async ()=>{
-      try{
-        await navigator.clipboard.writeText(q);
-        showToast("Pregunta copiada 📋");
-      }catch(e){
-        showToast("No se pudo copiar 😅");
+    // Confetti
+    const fx = document.getElementById("fx");
+    function confetti(){
+      fx.classList.add("show");
+      fx.innerHTML = "";
+      const colors = [
+        "rgba(255,77,136,.95)",
+        "rgba(34,211,238,.95)",
+        "rgba(139,92,246,.95)",
+        "rgba(255,255,255,.85)",
+        "rgba(255,190,11,.9)"
+      ];
+      for(let i=0;i<130;i++){
+        const c = document.createElement("i");
+        c.style.left = (Math.random()*100) + "vw";
+        c.style.background = colors[Math.floor(Math.random()*colors.length)];
+        c.style.animationDuration = (1.7 + Math.random()*1.8) + "s";
+        c.style.animationDelay = (Math.random()*0.12) + "s";
+        fx.appendChild(c);
       }
+      setTimeout(()=>{ fx.classList.remove("show"); fx.innerHTML=""; }, 2400);
+    }
+
+    // Buttons
+    const lootItems = ["🌮 Taco legendario","🩴 Chancla +10 respeto","🧃 Agua fresca","😈 Indirecta épica","🤡 Payasada rara"];
+    const msgs = [
+      "¿Qué pedo wey? 😛",
+      "Ahorita… (mentira) 😭",
+      "No mames qué chido 🔥",
+      "Ni modo, así es 😂",
+      "Viva México cabrones 🇲🇽"
+    ];
+    document.getElementById("btnLoot").onclick = ()=>{ showToast("Loot: " + lootItems[Math.floor(Math.random()*lootItems.length)]); confetti(); };
+    document.getElementById("btnMsg").onclick  = ()=>{ showToast(msgs[Math.floor(Math.random()*msgs.length)]); };
+    document.getElementById("btnBoom").onclick = ()=>{ showToast("🎉 VIVA MÉXICO"); confetti(); };
+
+    // Meme click
+    const memeArt = document.getElementById("memeArt");
+    const memeText = document.getElementById("memeText");
+    const memeFaces = ["🇲🇽😂","🩴💀","🌮😈","🧃😛","🔥🇲🇽","🤠🇲🇽"];
+    const memeLines = [
+      "“Cuando dices <b>‘ahorita’</b>… y se convierte en mañana” 😭",
+      "“Yo no fui… (sí fui)” 🤡",
+      "“No mames, qué calor” 🥵",
+      "“Tira paro y comparte” 😈",
+      "“Ni modo… pero con estilo” 😛"
+    ];
+    memeArt.onclick = ()=>{
+      memeArt.textContent = memeFaces[Math.floor(Math.random()*memeFaces.length)];
+      memeText.innerHTML = memeLines[Math.floor(Math.random()*memeLines.length)] + '<span class="tiny">Sigue picándole 😭</span>';
+      showToast("Meme cambiado 😭");
     };
 
-    const b2 = document.createElement("button");
-    b2.className = "btn btnPrimary";
-    b2.textContent = "Copiar mi respuesta";
-    b2.onclick = async ()=>{
-      const text = ta.value.trim();
-      if(!text){ showToast("Primero escribe algo 😛"); return; }
-      try{
-        await navigator.clipboard.writeText(text);
-        showToast("Respuesta copiada ✅");
-      }catch(e){
-        showToast("No se pudo copiar 😅");
+    // Secret hotspot shows hidden image
+    document.getElementById("secretHotspot").onclick = ()=>{
+      document.getElementById("secretModal").classList.add("show");
+      showToast("Encontraste el secreto 👀");
+      confetti();
+    };
+
+    // -------- Snake in a Box (dies on walls) --------
+    const canvas = document.getElementById("snake");
+    const ctx = canvas.getContext("2d");
+
+    const cell = 18;
+    const cols = Math.floor(canvas.width / cell);
+    const rows = Math.floor(canvas.height / cell);
+
+    let running = false;
+    let dir = {x:1,y:0};
+    let nextDir = {x:1,y:0};
+    let snake = [];
+    let boxFood = {x:10,y:10};
+    let score = 0;
+    let best = Number(localStorage.getItem("best_boxsnake") || 0);
+    document.getElementById("best").textContent = best;
+
+    function newFood(){
+      let f;
+      while(true){
+        f = {x: Math.floor(Math.random()*cols), y: Math.floor(Math.random()*rows)};
+        if(!snake.some(s=>s.x===f.x && s.y===f.y)) break;
       }
-    };
-
-    const b3 = document.createElement("button");
-    b3.className = "btn btnGhost";
-    b3.textContent = "Limpiar";
-    b3.onclick = ()=>{
-      ta.value = "";
-      localStorage.removeItem(key);
-      showToast("Listo 🧽");
-    };
-
-    actions.appendChild(b1);
-    actions.appendChild(b2);
-    actions.appendChild(b3);
-
-    wrap.appendChild(title);
-    wrap.appendChild(ta);
-    wrap.appendChild(actions);
-    return wrap;
-  }
-
-  function render(tab){
-    currentTab = tab;
-    qgrid.innerHTML = "";
-    DATA[tab].forEach((q, i)=> qgrid.appendChild(makeCard(q, i)));
-  }
-
-  // Tabs
-  document.querySelectorAll(".tabbtn").forEach(btn=>{
-    btn.onclick = ()=>{
-      document.querySelectorAll(".tabbtn").forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-      render(btn.dataset.tab);
-      showToast("Cambiado de nivel 😈");
-    };
-  });
-
-  // Random question: copy it immediately
-  document.getElementById("randomBtn").onclick = async ()=>{
-    const tabs = ["cagado","ctm","confiesa"];
-    const tab = tabs[Math.floor(Math.random()*tabs.length)];
-    const q = DATA[tab][Math.floor(Math.random()*DATA[tab].length)];
-    try{
-      await navigator.clipboard.writeText(q);
-      showToast("Random copiado 📋");
-    }catch(e){
-      showToast("No se pudo copiar 😅");
-    }
-  };
-
-  // --- Mini game: Esquiva la chancla ---
-  const canvas = document.getElementById("game");
-  const ctx = canvas.getContext("2d");
-
-  let running = false;
-  let score = 0;
-  let best = Number(localStorage.getItem("best_chancla") || 0);
-  document.getElementById("best").textContent = best;
-
-  const player = { x: 120, y: canvas.height-70, r: 16 };
-  let slippers = [];
-  let spawnTimer = 0;
-  let speed = 2.6;
-
-  function resetGame(){
-    running = false;
-    score = 0;
-    speed = 2.6;
-    slippers = [];
-    player.x = 120;
-    document.getElementById("score").textContent = score;
-    document.getElementById("state").textContent = "listo";
-    draw();
-  }
-
-  function startGame(){
-    if(running) return;
-    running = true;
-    document.getElementById("state").textContent = "jugando";
-    last = performance.now();
-    requestAnimationFrame(loop);
-  }
-
-  function endGame(){
-    running = false;
-    document.getElementById("state").textContent = "perdiste 💀";
-    if(score > best){
-      best = score;
-      localStorage.setItem("best_chancla", String(best));
-      document.getElementById("best").textContent = best;
-      showToast("Nuevo récord 🔥");
-      confettiBoom();
-    } else {
-      showToast("Te cayó la chancla 🩴💀");
-    }
-  }
-
-  function spawn(){
-    const x = 60 + Math.random()*(canvas.width-120);
-    slippers.push({ x, y:-20, w:34, h:18, vy: speed + Math.random()*1.8, rot: (Math.random()*2-1)*0.08 });
-  }
-
-  function collideRectCircle(rx, ry, rw, rh, cx, cy, cr){
-    const nx = Math.max(rx, Math.min(cx, rx+rw));
-    const ny = Math.max(ry, Math.min(cy, ry+rh));
-    const dx = cx-nx, dy = cy-ny;
-    return (dx*dx + dy*dy) <= cr*cr;
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    const g = ctx.createLinearGradient(0,canvas.height-90,0,canvas.height);
-    g.addColorStop(0,"rgba(255,77,136,.0)");
-    g.addColorStop(1,"rgba(255,77,136,.12)");
-    ctx.fillStyle = g;
-    ctx.fillRect(0,canvas.height-90,canvas.width,90);
-
-    // player
-    ctx.beginPath();
-    ctx.fillStyle = "rgba(34,211,238,.95)";
-    ctx.arc(player.x, player.y, player.r, 0, Math.PI*2);
-    ctx.fill();
-
-    // slippers
-    for(const s of slippers){
-      ctx.save();
-      ctx.translate(s.x, s.y);
-      ctx.rotate(s.rot * (s.y/40));
-      ctx.fillStyle = "rgba(255,255,255,.88)";
-      ctx.fillRect(-s.w/2, -s.h/2, s.w, s.h);
-      ctx.strokeStyle = "rgba(255,77,136,.9)";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.moveTo(-s.w/4, -s.h/2);
-      ctx.lineTo(0, 0);
-      ctx.lineTo(s.w/4, -s.h/2);
-      ctx.stroke();
-      ctx.restore();
+      boxFood = f;
     }
 
-    ctx.fillStyle = "rgba(255,255,255,.55)";
-    ctx.font = "14px system-ui";
-    ctx.fillText("Clic dentro del cuadro para mover", 14, 22);
-  }
-
-  let last = 0;
-  function loop(t){
-    if(!running) return;
-    const dt = Math.min(32, t-last);
-    last = t;
-
-    spawnTimer += dt;
-    const interval = Math.max(280, 900 - score*10);
-    if(spawnTimer > interval){
-      spawnTimer = 0;
-      spawn();
-    }
-
-    for(const s of slippers){
-      s.y += s.vy * (dt/16);
-      s.vy += 0.02 * (dt/16);
-    }
-    slippers = slippers.filter(s => s.y < canvas.height + 40);
-
-    if(Math.random() < 0.06) {
-      score += 1;
+    function resetSnake(){
+      running = false;
+      score = 0;
+      snake = [
+        {x: Math.floor(cols/2), y: Math.floor(rows/2)},
+        {x: Math.floor(cols/2)-1, y: Math.floor(rows/2)},
+        {x: Math.floor(cols/2)-2, y: Math.floor(rows/2)}
+      ];
+      dir = {x:1,y:0};
+      nextDir = {x:1,y:0};
+      newFood();
       document.getElementById("score").textContent = score;
-      speed = 2.6 + score*0.02;
+      document.getElementById("state").textContent = "listo";
+      draw();
     }
 
-    for(const s of slippers){
-      const rx = s.x - s.w/2, ry = s.y - s.h/2;
-      if(collideRectCircle(rx, ry, s.w, s.h, player.x, player.y, player.r)){
-        endGame();
-        break;
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      // background
+      ctx.fillStyle = "rgba(0,0,0,.20)";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      // border glow box
+      ctx.strokeStyle = "rgba(255,255,255,.25)";
+      ctx.lineWidth = 3;
+      ctx.strokeRect(2,2,canvas.width-4,canvas.height-4);
+
+      // food box 📦
+      const fx = boxFood.x*cell;
+      const fy = boxFood.y*cell;
+      ctx.fillStyle = "rgba(255,190,11,.95)";
+      ctx.fillRect(fx+2, fy+2, cell-4, cell-4);
+      ctx.fillStyle = "rgba(0,0,0,.35)";
+      ctx.fillRect(fx+6, fy+6, cell-12, cell-12);
+      ctx.fillStyle = "rgba(255,255,255,.85)";
+      ctx.font = "14px system-ui";
+      ctx.fillText("📦", fx+1, fy+16);
+
+      // snake
+      for(let i=0;i<snake.length;i++){
+        const s = snake[i];
+        ctx.fillStyle = (i===0) ? "rgba(34,211,238,.95)" : "rgba(139,92,246,.85)";
+        ctx.fillRect(s.x*cell+1, s.y*cell+1, cell-2, cell-2);
+      }
+
+      ctx.fillStyle = "rgba(255,255,255,.55)";
+      ctx.font = "14px system-ui";
+      ctx.fillText("Flechas = mover. Come 📦. Toca pared = 💀", 14, 22);
+    }
+
+    function gameOver(){
+      running = false;
+      document.getElementById("state").textContent = "perdiste 💀";
+      showToast("Te mató la pared 😭");
+      if(score > best){
+        best = score;
+        localStorage.setItem("best_boxsnake", String(best));
+        document.getElementById("best").textContent = best;
+        confetti();
+        showToast("Nuevo récord 🔥");
       }
     }
 
-    draw();
-    requestAnimationFrame(loop);
-  }
+    function step(){
+      if(!running) return;
 
-  canvas.addEventListener("click", (e)=>{
-    const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-    player.x = Math.max(player.r+8, Math.min(canvas.width-player.r-8, x));
-  });
+      dir = nextDir;
+      const head = snake[0];
+      const newHead = {x: head.x + dir.x, y: head.y + dir.y};
 
-  document.getElementById("start").onclick = startGame;
-  document.getElementById("reset").onclick = resetGame;
+      // DIE if touching walls (the box border)
+      if(newHead.x < 0 || newHead.y < 0 || newHead.x >= cols || newHead.y >= rows){
+        gameOver(); return;
+      }
+      // self hit
+      if(snake.some(s=>s.x===newHead.x && s.y===newHead.y)){
+        gameOver(); return;
+      }
 
-  // Initial
-  render("cagado");
-  resetGame();
-</script>
+      snake.unshift(newHead);
+
+      // eat box -> grow (do not pop)
+      if(newHead.x === boxFood.x && newHead.y === boxFood.y){
+        score += 1;
+        document.getElementById("score").textContent = score;
+        showToast("📦 +1  (creciste)");
+        if(score % 5 === 0){ confetti(); showToast("Racha 🔥"); }
+        newFood();
+      } else {
+        snake.pop();
+      }
+
+      draw();
+
+      // speed increases (fun)
+      const speed = Math.max(55, 140 - score*5);
+      setTimeout(step, speed);
+    }
+
+    window.addEventListener("keydown", (e)=>{
+      const k = e.key;
+      if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(k)) e.preventDefault();
+
+      // prevent reversing
+      if(k==="ArrowUp" && dir.y!==1) nextDir = {x:0,y:-1};
+      if(k==="ArrowDown" && dir.y!==-1) nextDir = {x:0,y:1};
+      if(k==="ArrowLeft" && dir.x!==1) nextDir = {x:-1,y:0};
+      if(k==="ArrowRight" && dir.x!==-1) nextDir = {x:1,y:0};
+    }, {passive:false});
+
+    document.getElementById("playSnake").onclick = ()=>{
+      if(running) return;
+      running = true;
+      document.getElementById("state").textContent = "jugando";
+      showToast("A darle 🐍📦");
+      step();
+    };
+    document.getElementById("resetSnake").onclick = ()=>{ resetSnake(); showToast("Reiniciado ⟲"); };
+
+    resetSnake();
+  </script>
 </body>
 </html>
