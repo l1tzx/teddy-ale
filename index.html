@@ -1,144 +1,437 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
-  <meta charset="UTF-8">
-  <title>Teddy & Ale ❤️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Preguntas Bien Mexas 😛</title>
   <style>
     :root{
-      --rosa:#ff4d88;
-      --rosa2:#ff7fb3;
-      --oscuro:#0b0b10;
-      --texto:rgba(255,255,255,0.92);
-      --suave:rgba(255,255,255,0.65);
-      --carta:rgba(255,255,255,0.08);
-      --borde:rgba(255,255,255,0.15);
+      --bg:#07070d;
+      --card: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --pink:#ff4d88;
+      --cyan:#22d3ee;
+      --purple:#8b5cf6;
     }
-
+    *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:Arial, sans-serif;
+      min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
       background:
-      radial-gradient(circle at 20% 10%, rgba(255,77,136,0.3), transparent 50%),
-      radial-gradient(circle at 80% 90%, rgba(255,77,136,0.2), transparent 50%),
-      var(--oscuro);
-      color:var(--texto);
-      text-align:center;
-      padding:40px;
+        radial-gradient(900px 500px at 15% 12%, rgba(255,77,136,.25), transparent 55%),
+        radial-gradient(900px 500px at 85% 18%, rgba(34,211,238,.16), transparent 60%),
+        radial-gradient(900px 700px at 50% 92%, rgba(139,92,246,.15), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    .gridbg{
+      position:fixed; inset:0; pointer-events:none; opacity:.45;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 62%);
+      animation: drift 10s linear infinite;
+    }
+    @keyframes drift { to { transform: translate3d(52px,52px,0); } }
+
+    .float-layer{ position:fixed; inset:0; pointer-events:none; opacity:.6; filter:drop-shadow(0 10px 16px rgba(0,0,0,.55)); }
+    .float{ position:absolute; transform: translateY(110vh); user-select:none; animation: floatUp linear infinite; }
+    @keyframes floatUp{
+      0%{ transform: translateY(110vh) translateX(0) scale(.9); opacity:0; }
+      12%{ opacity:1; }
+      100%{ transform: translateY(-15vh) translateX(40px) scale(1.2); opacity:0; }
     }
 
-    h1{
-      font-size:60px;
-      margin-bottom:5px;
+    .wrap{ width:min(980px, 92vw); margin:0 auto; padding:56px 0 46px; text-align:center; position:relative; }
+    .badge{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 14px; border-radius:999px;
+      border:1px solid var(--border); background:rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      color:var(--muted); font-size:14px;
     }
-
-    .sub{
-      color:var(--suave);
-      margin-bottom:20px;
+    .dot{ width:10px; height:10px; border-radius:999px;
+      background:linear-gradient(135deg,var(--pink),var(--cyan));
+      box-shadow:0 0 18px rgba(255,77,136,.45);
+      animation:pulse 1.4s ease-in-out infinite;
     }
+    @keyframes pulse { 50%{ transform:scale(1.35); opacity:1 } }
+    h1{ margin:18px 0 6px; font-size: clamp(34px,5.8vw,66px); letter-spacing:-1px; }
+    .sub{ margin:0 0 18px; color:var(--muted); font-size: clamp(14px,2.2vw,18px); }
 
-    .corazon{
-      font-size:80px;
-      animation:latido 1.5s infinite;
-    }
-
-    @keyframes latido{
-      0%,100%{transform:scale(1);}
-      50%{transform:scale(1.2);}
-    }
-
-    .card{
-      background:var(--carta);
-      border:1px solid var(--borde);
-      padding:20px;
-      border-radius:15px;
-      max-width:500px;
-      margin:20px auto;
-    }
-
+    .row{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:14px 0 18px; }
     button{
-      background:linear-gradient(45deg,var(--rosa),var(--rosa2));
-      border:none;
-      padding:15px;
-      border-radius:10px;
-      color:white;
-      font-size:16px;
-      cursor:pointer;
-      margin-top:10px;
+      border:none; cursor:pointer; user-select:none;
+      padding:12px 14px; border-radius:14px;
+      font-weight:800; font-size:14px;
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    button:active{ transform:scale(.98) }
+    .btnA{ background:linear-gradient(135deg,var(--pink),#ff7fb3); color:white; }
+    .btnB{ background:rgba(255,255,255,.08); border:1px solid var(--border); color:var(--text); }
+    .btnC{ background:linear-gradient(135deg,var(--purple),var(--cyan)); color:#041018; }
+
+    .panel{
+      margin: 0 auto;
+      width:min(860px, 100%);
+      border:1px solid var(--border);
+      background: var(--card);
+      border-radius:18px;
+      padding: 16px;
+      text-align:left;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      overflow:hidden;
+      position:relative;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-2px; pointer-events:none; opacity:.9;
+      background:
+        radial-gradient(420px 120px at 30% 0%, rgba(255,77,136,.25), transparent 55%),
+        radial-gradient(420px 120px at 80% 0%, rgba(34,211,238,.18), transparent 55%);
+    }
+    .panel > *{ position:relative; }
+    .big{
+      font-size: clamp(18px,2.3vw,24px);
+      line-height:1.4;
+      margin: 8px 0 10px;
+    }
+    .mini{ color:var(--muted); font-size:13px; }
+
+    .pillrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+    .pill{
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      color:var(--muted); font-size:13px;
     }
 
-    button:hover{
-      opacity:0.8;
-    }
-
-    footer{
-      margin-top:30px;
-      color:var(--suave);
+    /* Toast */
+    .toast{
+      position:fixed;
+      left:50%; bottom:20px;
+      transform:translateX(-50%) translateY(22px);
+      background:rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.14);
+      color:rgba(255,255,255,.92);
+      padding:10px 14px;
+      border-radius:999px;
+      backdrop-filter: blur(10px);
+      opacity:0;
+      transition:.2s ease;
+      pointer-events:none;
       font-size:14px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.55);
     }
+    .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
+    /* Mini game */
+    .gameWrap{ margin-top:16px; display:grid; gap:12px; }
+    .gameHeader{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; }
+    .stats{ display:flex; gap:10px; flex-wrap:wrap; }
+    .stat{
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.14);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .stat b{ color:var(--text); }
+    canvas{
+      width:100%;
+      height: 360px;
+      background: rgba(0,0,0,.18);
+      border:1px solid var(--border);
+      border-radius:16px;
+      display:block;
+    }
+    footer{ margin-top:16px; color:rgba(255,255,255,.55); font-size:13px; }
+    a{ color:#ff7fb3; text-decoration:none; }
   </style>
 </head>
-
 <body>
+  <div class="gridbg" aria-hidden="true"></div>
+  <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
+  <div class="toast" id="toast">Listo ✅</div>
 
-<h1>Teddy & Ale</h1>
+  <main class="wrap">
+    <div class="badge"><span class="dot"></span> Preguntas pa’ IG — <b>bien cagadas</b> y <b>bien pasadas</b> 😛</div>
+    <h1>Sticker de Preguntas Mexas</h1>
+    <p class="sub">Pícale a un nivel → te suelta una pregunta. Copia y pégala en tu story 😈</p>
 
-<div class="sub">
-Una página solo para nosotros dos 💕
-</div>
+    <div class="row">
+      <button class="btnA" id="nivelCagado">Nivel bien cagado 😂</button>
+      <button class="btnC" id="nivelCTM">Nivel “anda chinga tu madre” 😈</button>
+      <button class="btnB" id="copiar">Copiar pregunta 📋</button>
+      <button class="btnB" id="random">Random 🎲</button>
+    </div>
 
-<div class="corazon">❤️</div>
+    <section class="panel" aria-label="Pregunta">
+      <div class="mini">Pregunta actual:</div>
+      <div class="big" id="pregunta">Pícale a un nivel pa’ soltar la primera 😛</div>
+      <div class="pillrow">
+        <span class="pill" id="tag">sin nivel</span>
+        <span class="pill">💬 pa’ que contesten</span>
+        <span class="pill">😛 puro cotorreo</span>
+      </div>
 
+      <div class="gameWrap">
+        <div class="mini" style="margin-top:8px;">
+          Mini juego: <b>Esquiva la chancla</b> 🩴 (clic dentro del cuadro para mover tu bolita)
+        </div>
 
-<div class="card">
+        <div class="gameHeader">
+          <div class="stats">
+            <div class="stat">Puntos: <b id="score">0</b></div>
+            <div class="stat">Récord: <b id="best">0</b></div>
+            <div class="stat">Estado: <b id="state">listo</b></div>
+          </div>
+          <div class="row" style="margin:0; justify-content:flex-end;">
+            <button class="btnA" id="start">Iniciar juego ▶</button>
+            <button class="btnB" id="reset">Reiniciar ⟲</button>
+          </div>
+        </div>
 
-<h3>Nuestra historia</h3>
+        <canvas id="game" width="900" height="360"></canvas>
+        <div class="mini">Tip: entre más sobrevives, más rápido caen 😮‍💨</div>
+      </div>
+    </section>
 
-<p id="mensaje">
-Teddy y Ale… no es perfecto, pero es real.  
-Contigo me siento feliz, tranquilo y completo.
-</p>
-
-<button onclick="cambiarMensaje()">
-Presiona aquí
-</button>
-
-</div>
-
-
-<footer>
-Hecho con amor 💌
-</footer>
-
+    <footer>
+      Si quieres meter imágenes: súbelas al repo en una carpeta <b>assets</b> y las jalamos con <code>assets/tuFoto.jpg</code>.
+    </footer>
+  </main>
 
 <script>
+  // Floating emojis
+  const floatLayer = document.getElementById("floatLayer");
+  const floatEmojis = ["😂","😈","😛","💀","🩴","🌮","🔥","💬","🤡","🧠","🧃"];
+  for(let i=0;i<26;i++){
+    const el = document.createElement("div");
+    el.className = "float";
+    el.textContent = floatEmojis[Math.floor(Math.random()*floatEmojis.length)];
+    el.style.left = (Math.random()*100) + "vw";
+    el.style.animationDuration = (6 + Math.random()*10) + "s";
+    el.style.animationDelay = (Math.random()*8) + "s";
+    el.style.fontSize = (14 + Math.random()*22) + "px";
+    floatLayer.appendChild(el);
+  }
 
-function cambiarMensaje(){
+  // Toast
+  const toast = document.getElementById("toast");
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"), 1400);
+  }
 
-const mensajes = [
+  // Questions
+  const cagado = [
+    "¿Quién es más probable que diga “yo no fui” y sí fue? 😂",
+    "¿Quién se duerme primero en el peda? 😴",
+    "¿Quién es más mandilón y todavía lo niega? 🥴",
+    "¿Quién se hace el interesante pero contesta en 2 segundos? 📲",
+    "¿Quién parece inocente pero es bien diabl@? 😈",
+    "¿Quién se ríe de todo aunque ni entendió? 🤡",
+    "¿Quién es más dramático/a por cualquier cosita? 🎭",
+    "¿Quién es el/la más chismoso/a nivel tía? 🗣️",
+    "¿Quién es más probable que se pierda en su propia colonia? 🧭",
+    "¿Quién dice “ahorita” y aparece en 3 días? 😭"
+  ];
 
-"Teddy ❤️ Ale — siempre juntos.",
+  const ctm = [
+    "¿Quién ocupa que lo manden a chingar a su madre (con cariño)? 😈",
+    "¿Quién se cree mucho y no trae con qué? 💀",
+    "¿Quién habla un chingo y dice pura pendejada? 😂",
+    "¿Quién debe dinero y se hace bien pendejo? 💸",
+    "¿Quién sería el primero en venderte por unos tacos? 🌮",
+    "¿Quién se hace la víctima pero es el problema? 🫠",
+    "¿Quién promete “cambio” y sale peor? 🤡",
+    "¿Quién se la vive de ‘yo no fui’ pero siempre es? 😭",
+    "¿Quién te cae bien… pero también chinga tu madre? 😛",
+    "¿Quién necesita un reality check URGENTE? 🧠"
+  ];
 
-"Eres mi persona favorita.",
+  const preguntaEl = document.getElementById("pregunta");
+  const tagEl = document.getElementById("tag");
 
-"Pase lo que pase, siempre tú.",
+  function pick(arr, tag){
+    const q = arr[Math.floor(Math.random()*arr.length)];
+    preguntaEl.textContent = q;
+    tagEl.textContent = tag;
+    showToast("Listo pa’ tu story 😛");
+  }
 
-"Contigo todo se siente mejor.",
+  document.getElementById("nivelCagado").onclick = () => pick(cagado, "nivel bien cagado 😂");
+  document.getElementById("nivelCTM").onclick = () => pick(ctm, "nivel CTM 😈");
+  document.getElementById("random").onclick = () => pick((Math.random()>0.5?cagado:ctm), "random 🎲");
 
-"Solo tú y yo 🫶"
+  document.getElementById("copiar").onclick = async () => {
+    try{
+      await navigator.clipboard.writeText(preguntaEl.textContent);
+      showToast("Copiado 📋");
+    }catch(e){
+      showToast("No se pudo copiar 😅");
+    }
+  };
 
-];
+  // --- Mini game: Esquiva la chancla ---
+  const canvas = document.getElementById("game");
+  const ctx = canvas.getContext("2d");
 
-const random =
-mensajes[Math.floor(Math.random()*mensajes.length)];
+  let running = false;
+  let score = 0;
+  let best = Number(localStorage.getItem("best_chancla") || 0);
+  document.getElementById("best").textContent = best;
 
-document.getElementById("mensaje").textContent=random;
+  const player = { x: 120, y: canvas.height-70, r: 16, vx:0 };
+  let slippers = [];
+  let spawnTimer = 0;
+  let speed = 2.6;
 
-}
+  function resetGame(){
+    running = false;
+    score = 0;
+    speed = 2.6;
+    slippers = [];
+    player.x = 120;
+    document.getElementById("score").textContent = score;
+    document.getElementById("state").textContent = "listo";
+    draw();
+  }
 
+  function startGame(){
+    if(running) return;
+    running = true;
+    document.getElementById("state").textContent = "jugando";
+    last = performance.now();
+    requestAnimationFrame(loop);
+  }
+
+  function endGame(){
+    running = false;
+    document.getElementById("state").textContent = "perdiste 💀";
+    if(score > best){
+      best = score;
+      localStorage.setItem("best_chancla", String(best));
+      document.getElementById("best").textContent = best;
+      showToast("Nuevo récord 🔥");
+    } else {
+      showToast("Te cayó la chancla 🩴💀");
+    }
+  }
+
+  function spawn(){
+    const x = 60 + Math.random()*(canvas.width-120);
+    slippers.push({ x, y:-20, w:34, h:18, vy: speed + Math.random()*1.8, rot: (Math.random()*2-1)*0.08 });
+  }
+
+  function collideRectCircle(rx, ry, rw, rh, cx, cy, cr){
+    const nx = Math.max(rx, Math.min(cx, rx+rw));
+    const ny = Math.max(ry, Math.min(cy, ry+rh));
+    const dx = cx-nx, dy = cy-ny;
+    return (dx*dx + dy*dy) <= cr*cr;
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    // glow ground
+    const g = ctx.createLinearGradient(0,canvas.height-90,0,canvas.height);
+    g.addColorStop(0,"rgba(255,77,136,.0)");
+    g.addColorStop(1,"rgba(255,77,136,.12)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0,canvas.height-90,canvas.width,90);
+
+    // player
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(34,211,238,.95)";
+    ctx.arc(player.x, player.y, player.r, 0, Math.PI*2);
+    ctx.fill();
+
+    // slippers
+    for(const s of slippers){
+      ctx.save();
+      ctx.translate(s.x, s.y);
+      ctx.rotate(s.rot * (s.y/40));
+      ctx.fillStyle = "rgba(255,255,255,.88)";
+      ctx.fillRect(-s.w/2, -s.h/2, s.w, s.h);
+      // tiny strap
+      ctx.strokeStyle = "rgba(255,77,136,.9)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(-s.w/4, -s.h/2);
+      ctx.lineTo(0, 0);
+      ctx.lineTo(s.w/4, -s.h/2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // hud
+    ctx.fillStyle = "rgba(255,255,255,.55)";
+    ctx.font = "14px system-ui";
+    ctx.fillText("Clic dentro del cuadro para mover", 14, 22);
+  }
+
+  let last = 0;
+  function loop(t){
+    if(!running) return;
+    const dt = Math.min(32, t-last);
+    last = t;
+
+    // spawn
+    spawnTimer += dt;
+    const interval = Math.max(280, 900 - score*10); // faster as score increases
+    if(spawnTimer > interval){
+      spawnTimer = 0;
+      spawn();
+    }
+
+    // update slippers
+    for(const s of slippers){
+      s.y += s.vy * (dt/16);
+      s.vy += 0.02 * (dt/16);
+    }
+    slippers = slippers.filter(s => s.y < canvas.height + 40);
+
+    // score up over time
+    if(Math.random() < 0.06) {
+      score += 1;
+      document.getElementById("score").textContent = score;
+      speed = 2.6 + score*0.02;
+    }
+
+    // collision
+    for(const s of slippers){
+      const rx = s.x - s.w/2, ry = s.y - s.h/2;
+      if(collideRectCircle(rx, ry, s.w, s.h, player.x, player.y, player.r)){
+        endGame();
+        break;
+      }
+    }
+
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  canvas.addEventListener("click", (e)=>{
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    player.x = Math.max(player.r+8, Math.min(canvas.width-player.r-8, x));
+  });
+
+  document.getElementById("start").onclick = startGame;
+  document.getElementById("reset").onclick = resetGame;
+
+  // initial draw
+  resetGame();
 </script>
-
 </body>
 </html>
