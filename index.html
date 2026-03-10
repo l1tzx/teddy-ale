@@ -1,672 +1,897 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OMGL1TZX — México Quest 🐍🇲🇽</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <title>Para Kami 💖</title>
   <style>
-    :root{
-      --bg:#06060c;
-      --card: rgba(255,255,255,.085);
-      --border: rgba(255,255,255,.14);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --pink:#ff4d88;
-      --cyan:#22d3ee;
-      --purple:#8b5cf6;
-      --shadow: 0 18px 60px rgba(0,0,0,.48);
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
+
+    :root {
+      --bg1: #120018;
+      --bg2: #2b0035;
+      --pink: #ff4fa3;
+      --hotpink: #ff1f8f;
+      --purple: #8a2eff;
+      --cyan: #5cf3ff;
+      --gold: #ffd166;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.1);
+      --glass-2: rgba(255, 255, 255, 0.15);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(-45deg, var(--bg1), var(--bg2), #240046, #3a0ca3);
+      background-size: 400% 400%;
+      animation: bgMove 14s ease infinite;
+      color: white;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
       background:
-        radial-gradient(900px 500px at 15% 12%, rgba(255,77,136,.25), transparent 55%),
-        radial-gradient(900px 500px at 85% 18%, rgba(34,211,238,.16), transparent 60%),
-        radial-gradient(900px 700px at 50% 92%, rgba(139,92,246,.15), transparent 60%),
-        var(--bg);
-      overflow-x:hidden;
+        radial-gradient(circle at 20% 20%, rgba(255, 79, 163, 0.18), transparent 25%),
+        radial-gradient(circle at 80% 25%, rgba(92, 243, 255, 0.15), transparent 25%),
+        radial-gradient(circle at 50% 85%, rgba(138, 46, 255, 0.18), transparent 30%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .gridbg{
-      position:fixed; inset:0; pointer-events:none; opacity:.42;
-      background-image:
-        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 52px 52px;
-      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
-      animation: drift 10s linear infinite;
-    }
-    @keyframes drift { to { transform: translate3d(52px,52px,0); } }
-
-    /* background slang words */
-    .slang{
-      position:fixed; inset:0; pointer-events:none; opacity:.23; z-index:0;
-      overflow:hidden;
-    }
-    .slang span{
-      position:absolute;
-      font-weight:900;
-      letter-spacing:.8px;
-      color: rgba(255,255,255,.35);
-      text-transform: uppercase;
-      animation: floatWords linear infinite;
-      filter: drop-shadow(0 18px 30px rgba(0,0,0,.55));
-      user-select:none;
-      white-space:nowrap;
-    }
-    @keyframes floatWords{
-      0%{ transform: translateY(110vh) translateX(0) rotate(-2deg); opacity:0; }
-      15%{ opacity:1; }
-      100%{ transform: translateY(-20vh) translateX(60px) rotate(2deg); opacity:0; }
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    /* top corner name */
-    .corner{
-      position: fixed; top: 12px; left: 12px; z-index: 50;
-      display:flex; align-items:center; gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border:1px solid var(--border);
-      background: rgba(0,0,0,.35);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.35);
-      font-weight: 900;
-      letter-spacing:.6px;
-    }
-    .corner .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg,var(--pink),var(--cyan));
-      box-shadow: 0 0 18px rgba(255,77,136,.45);
-      animation:pulse 1.4s ease-in-out infinite;
-    }
-    @keyframes pulse { 50%{ transform:scale(1.35); opacity:1 } }
-
-    .wrap{
-      width:min(1080px, 92vw);
-      margin:0 auto;
-      padding:62px 0 46px;
-      position:relative;
-      z-index:1;
-      text-align:center;
+    .screen {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 2;
     }
 
-    .badge{
-      display:inline-flex; gap:10px; align-items:center;
-      padding:10px 14px; border-radius:999px;
-      border:1px solid var(--border); background:rgba(255,255,255,.06);
-      backdrop-filter: blur(10px);
-      color:var(--muted); font-size:14px;
+    .screen.active {
+      display: flex;
     }
 
-    h1{ margin:18px 0 6px; font-size: clamp(34px,5.8vw,72px); letter-spacing:-1px; }
-    .sub{ margin:0 0 16px; color:var(--muted); font-size: clamp(14px,2.2vw,18px); }
-
-    .viva{
-      margin: 10px auto 16px;
-      width: fit-content;
-      padding: 10px 14px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(255,77,136,.18));
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: .9px;
-      animation: pop 1.9s ease-in-out infinite;
-    }
-    @keyframes pop{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-3px) scale(1.02);} }
-
-    .panel{
-      margin: 0 auto;
-      width:min(980px, 100%);
-      border:1px solid var(--border);
-      background: var(--card);
-      border-radius:18px;
-      padding: 16px;
-      text-align:left;
-      backdrop-filter: blur(12px);
+    .card {
+      width: min(100%, 430px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.08));
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 28px;
       box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
+      padding: 20px 18px 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: cardIn 0.9s ease;
     }
-    .panel:before{
-      content:"";
-      position:absolute; inset:-2px; pointer-events:none; opacity:.9;
-      background:
-        radial-gradient(520px 140px at 20% 0%, rgba(255,77,136,.23), transparent 55%),
-        radial-gradient(520px 140px at 85% 0%, rgba(34,211,238,.16), transparent 55%);
-    }
-    .panel > *{ position:relative; }
 
-    .row{
-      display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin: 10px 0 12px;
+    @keyframes cardIn {
+      0% { transform: translateY(30px) scale(0.92); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
     }
-    .btn{
-      border:none; cursor:pointer; user-select:none;
-      padding: 11px 13px;
-      border-radius: 14px;
-      font-weight: 900;
+
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      filter: blur(1px);
+      animation: twinkle 2.2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { transform: scale(0.4); opacity: 0.3; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+
+    .logo {
+      position: absolute;
+      top: 14px;
+      left: 14px;
       font-size: 13px;
-      transition: transform .12s ease, opacity .12s ease;
+      letter-spacing: 1px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 0 15px rgba(255,79,163,0.25);
+      z-index: 5;
     }
-    .btn:active{ transform:scale(.98) }
-    .btnA{ background: linear-gradient(135deg, var(--pink), #ff7fb3); color:white; }
-    .btnB{ background: rgba(255,255,255,.07); border:1px solid var(--border); color:var(--text); }
-    .btnC{ background: linear-gradient(135deg, var(--purple), var(--cyan)); color:#061018; }
 
-    .quest{
-      display:grid; gap:12px; margin-top: 8px;
-      grid-template-columns: 1fr;
+    .mini-note {
+      position: absolute;
+      top: 15px;
+      right: 14px;
+      font-size: 12px;
+      color: #ffe7f3;
+      opacity: 0.85;
+      z-index: 5;
+      background: rgba(0,0,0,0.18);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
     }
-    @media(min-width:920px){ .quest{ grid-template-columns: 1.1fr .9fr; } }
 
-    .card{
-      border:1px solid var(--border);
-      background: rgba(0,0,0,.14);
-      border-radius: 16px;
-      padding: 14px;
-      overflow:hidden;
-      position:relative;
+    h1 {
+      margin: 35px 0 10px;
+      font-size: 2.2rem;
+      line-height: 1.05;
+      text-shadow: 0 0 15px rgba(255,79,163,0.35);
     }
-    .card h3{ margin:0 0 6px; }
-    .mini{ color:var(--muted); font-size:13px; line-height:1.4; }
 
-    /* Meme card */
-    .memeBox{
-      display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      padding: 12px;
-      border-radius: 14px;
+    .name-glow {
+      display: inline-block;
+      color: #ffd8ec;
+      text-shadow:
+        0 0 8px rgba(255,255,255,0.65),
+        0 0 22px rgba(255,79,163,0.45),
+        0 0 38px rgba(138,46,255,0.35);
+      animation: pulseGlow 2.4s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .sub {
+      font-size: 1rem;
+      line-height: 1.45;
+      color: #f9e8f5;
+      margin: 0 auto 16px;
+      max-width: 330px;
+    }
+
+    .big-btn,
+    .small-btn {
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-weight: 700;
+      border-radius: 999px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+
+    .big-btn:active,
+    .small-btn:active {
+      transform: scale(0.95);
+    }
+
+    .big-btn {
+      padding: 16px 24px;
+      min-width: 230px;
+      font-size: 1.1rem;
+      background: linear-gradient(90deg, var(--hotpink), var(--purple));
+      box-shadow: 0 10px 28px rgba(255,31,143,0.35), 0 0 20px rgba(138,46,255,0.25);
+      margin-top: 12px;
+    }
+
+    .small-btn {
+      padding: 12px 18px;
+      font-size: 0.96rem;
+      background: linear-gradient(90deg, #ff6fb3, #7c4dff);
+      box-shadow: 0 8px 20px rgba(255,79,163,0.25);
+      margin: 6px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
       margin-top: 10px;
     }
-    .memeArt{
-      flex: 1 1 280px;
-      min-height: 120px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background:
-        radial-gradient(380px 120px at 20% 30%, rgba(34,211,238,.18), transparent 60%),
-        radial-gradient(380px 120px at 80% 30%, rgba(255,77,136,.18), transparent 60%),
-        rgba(0,0,0,.18);
-      display:flex; align-items:center; justify-content:center;
-      font-size: 56px;
-      position:relative;
-      overflow:hidden;
-      cursor:pointer;
-      transition: transform .12s ease;
+
+    .typing {
+      min-height: 60px;
+      font-size: 1.08rem;
+      line-height: 1.4;
+      margin: 12px auto 4px;
+      max-width: 330px;
+      color: #fff4fb;
     }
-    .memeArt:active{ transform: scale(.98); }
-    .memeArt:after{
-      content:"PICA AQUÍ";
-      position:absolute;
-      bottom: 10px; right: 12px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      font-size: 12px;
-      color: rgba(255,255,255,.7);
-      padding: 6px 10px;
+
+    .love-title {
+      font-size: 2.6rem;
+      line-height: 1;
+      margin: 50px 0 10px;
+      animation: floatText 2.5s ease-in-out infinite;
+      text-shadow:
+        0 0 12px rgba(255,255,255,0.4),
+        0 0 24px rgba(255,79,163,0.45),
+        0 0 36px rgba(138,46,255,0.3);
+    }
+
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .cute-box {
+      margin: 14px auto 10px;
+      width: 100%;
+      max-width: 345px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.14);
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.03rem;
+      line-height: 1.5;
+      box-shadow: inset 0 0 18px rgba(255,255,255,0.06);
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 8px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.28);
-      backdrop-filter: blur(10px);
+      font-size: 0.82rem;
+      background: rgba(255, 209, 102, 0.14);
+      border: 1px solid rgba(255,209,102,0.35);
+      color: #ffe9b3;
     }
-    .memeText{
-      flex: 1 1 260px;
-      font-weight: 900;
-      font-size: 14px;
-      line-height: 1.35;
-    }
-    .memeText .tiny{ display:block; margin-top:6px; font-weight:700; color: rgba(255,255,255,.68); }
 
-    /* Snake game box */
-    canvas{
-      width:100%;
-      height: 360px;
-      background: rgba(0,0,0,.18);
-      border:2px solid rgba(255,255,255,.2);
-      border-radius:16px;
-      display:block;
+    .game-wrap {
+      margin-top: 10px;
     }
-    .stats{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;
-    }
-    .stat{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.14);
-      border-radius: 14px;
-      padding: 10px 12px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .stat b{ color: var(--text); }
 
-    /* Music */
-    .musicBox{
-      margin-top: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.14);
-      border-radius: 16px;
-      padding: 12px;
+    .hud {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
     }
-    .ytWrap{
+
+    .pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 8px 12px;
+      min-width: 92px;
+    }
+
+    #gameArea {
       position: relative;
       width: 100%;
-      padding-top: 56.25%;
-      border-radius: 14px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      margin-top: 10px;
-    }
-    .ytWrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
-
-    /* Toast */
-    .toast{
-      position:fixed;
-      left:50%; bottom:20px;
-      transform:translateX(-50%) translateY(22px);
-      background:rgba(0,0,0,.55);
-      border:1px solid rgba(255,255,255,.14);
-      color:rgba(255,255,255,.92);
-      padding:10px 14px;
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-      opacity:0;
-      transition:.2s ease;
-      pointer-events:none;
-      font-size:14px;
-      box-shadow: 0 20px 70px rgba(0,0,0,.55);
-      z-index: 80;
-    }
-    .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-    /* Confetti */
-    .fx{ position:fixed; inset:0; pointer-events:none; overflow:hidden; display:none; z-index:60; }
-    .fx.show{ display:block; }
-    .fx i{
-      position:absolute;
-      width: 9px; height: 14px;
-      border-radius: 3px;
-      top:-20px;
-      opacity:.95;
-      animation: fall linear forwards;
-    }
-    @keyframes fall{ to{ transform: translateY(110vh) rotate(540deg); opacity:0.9; } }
-
-    /* Secret image modal */
-    #secretModal{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.7);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index: 90;
-      backdrop-filter: blur(8px);
-    }
-    #secretModal.show{ display:flex; }
-    #secretModal .box{
-      width:min(520px, 92vw);
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.35);
-      border-radius: 16px;
-      padding: 12px;
-      text-align:center;
-      box-shadow: 0 30px 120px rgba(0,0,0,.7);
-    }
-    #secretModal img{
-      width:100%;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      display:block;
-    }
-    #secretModal .cap{
-      margin-top:10px;
-      font-weight:900;
-      color: rgba(255,255,255,.86);
+      max-width: 350px;
+      height: 400px;
+      margin: 0 auto;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.12), transparent 30%),
+        linear-gradient(180deg, rgba(255, 79, 163, 0.16), rgba(92, 243, 255, 0.08)),
+        rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: inset 0 0 30px rgba(255,255,255,0.05);
+      touch-action: manipulation;
     }
 
-    /* Hidden “hotspot” */
-    .secretHotspot{
-      position:absolute;
-      width: 18px; height: 18px;
-      right: 10px; top: 10px;
-      opacity: 0.02; /* basically invisible */
+    .target {
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      animation: popIn 0.25s ease;
       cursor: pointer;
-      border-radius: 999px;
-      background: white;
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,0.18));
     }
 
-    footer{ margin-top:16px; color:rgba(255,255,255,.55); font-size:13px; text-align:center; }
+    @keyframes popIn {
+      0% { transform: scale(0.2) rotate(-15deg); opacity: 0; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .heart-target {
+      background: radial-gradient(circle at 30% 30%, #ffd6ea, #ff4fa3 60%, #f40076);
+      box-shadow: 0 0 18px rgba(255,79,163,0.45);
+    }
+
+    .bad-target {
+      background: radial-gradient(circle at 30% 30%, #d7f8ff, #5cf3ff 60%, #118ab2);
+      box-shadow: 0 0 18px rgba(92,243,255,0.4);
+    }
+
+    .popup-msg {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(10, 10, 20, 0.85);
+      color: white;
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 0.96rem;
+      max-width: 88vw;
+      text-align: center;
+      z-index: 20;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.35s ease;
+    }
+
+    .popup-msg.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .floating-heart,
+    .floating-star {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.85;
+      animation: rise 6s linear forwards;
+    }
+
+    .floating-heart {
+      font-size: 20px;
+    }
+
+    .floating-star {
+      font-size: 14px;
+      color: #fff4b8;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.4) rotate(35deg);
+        opacity: 0;
+      }
+    }
+
+    .secret-banner {
+      position: fixed;
+      inset: auto 14px 16px 14px;
+      background: linear-gradient(90deg, rgba(0,128,0,0.9), rgba(255,255,255,0.92), rgba(255,0,0,0.9));
+      color: #111;
+      font-weight: 800;
+      text-align: center;
+      padding: 14px;
+      border-radius: 18px;
+      z-index: 30;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+      display: none;
+      animation: bounceIn 0.45s ease;
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.7) translateY(20px); opacity: 0; }
+      70% { transform: scale(1.03); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .tiny {
+      font-size: 0.82rem;
+      opacity: 0.82;
+      margin-top: 8px;
+    }
+
+    .music-note {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #ffdff0;
+      opacity: 0.9;
+    }
+
+    .bg-words {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-words span {
+      position: absolute;
+      color: rgba(255,255,255,0.08);
+      font-weight: 800;
+      letter-spacing: 1px;
+      animation: driftWord linear infinite;
+      text-shadow: 0 0 12px rgba(255,255,255,0.08);
+      white-space: nowrap;
+    }
+
+    @keyframes driftWord {
+      from {
+        transform: translateY(20px) translateX(-10px);
+        opacity: 0;
+      }
+      10%, 90% {
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120vh) translateX(10px);
+        opacity: 0;
+      }
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: #f9ddea;
+      opacity: 0.85;
+    }
   </style>
 </head>
 <body>
-  <div class="gridbg" aria-hidden="true"></div>
-  <div class="slang" id="slang" aria-hidden="true"></div>
+  <div class="bg-words" id="bgWords"></div>
 
-  <div class="fx" id="fx" aria-hidden="true"></div>
-  <div class="toast" id="toast">Listo ✅</div>
+  <div class="logo" id="secretTap">KAMI MODE 💘</div>
+  <div class="mini-note">hecho con cariño</div>
 
-  <div class="corner"><span class="dot"></span> OMGL1TZX</div>
+  <section class="screen active" id="screen1">
+    <div class="card">
+      <div class="sparkle" style="top:18px;left:26px;"></div>
+      <div class="sparkle" style="top:52px;right:38px;animation-delay:.6s;"></div>
+      <div class="sparkle" style="bottom:70px;left:52px;animation-delay:1.2s;"></div>
 
-  <!-- Secret Modal -->
-  <div id="secretModal" onclick="this.classList.remove('show')">
-    <div class="box" onclick="event.stopPropagation()">
-      <img src="assets/secret.jpg" alt="secret">
-      <div class="cap">Encontraste el secreto 😛🇲🇽</div>
-      <div class="mini" style="text-align:center;margin-top:6px;">(clic afuera para cerrar)</div>
+      <h1>Oye <span class="name-glow">Kami</span> ✨</h1>
+      <p class="sub">
+        Te hice una paginita bien bonita con animaciones, sorpresas,
+        frases lindas y un mini juego para celular 💖
+      </p>
+
+      <div class="typing" id="typingText"></div>
+
+      <button class="big-btn" id="startBtn">Presióname chiquita</button>
+
+      <div class="music-note">
+        🎵 Cuando me mandes la música, solo pegas el link en el código.
+      </div>
     </div>
-  </div>
+  </section>
 
-  <main class="wrap" id="wrap">
-    <div class="badge"><span class="dot" style="width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--pink),var(--cyan));"></span> México Quest: cotorreo + snake 🐍</div>
-    <h1>México Quest 🇲🇽</h1>
-    <p class="sub">Pica cosas → salen mensajes → confetti → y el snake se pone más cabrón 😈</p>
-    <div class="viva">VIVA MÉXICO</div>
+  <section class="screen" id="screen2">
+    <div class="card">
+      <h2 class="love-title">t quiero chiquita 💗</h2>
 
-    <section class="panel" style="position:relative;">
-      <!-- Hidden hotspot (top-right of panel) -->
-      <div class="secretHotspot" id="secretHotspot" title="👀"></div>
-
-      <div class="row">
-        <button class="btn btnA" id="btnLoot">Abrir loot 🎁</button>
-        <button class="btn btnB" id="btnMsg">Mensaje random 💬</button>
-        <button class="btn btnC" id="btnBoom">Confetti 🎉</button>
+      <div class="cute-box" id="phraseBox">
+        Eres de esas personas que alegran bonito todo, Kami ✨
       </div>
 
-      <div class="quest">
-        <div class="card">
-          <h3>📸 Meme México</h3>
-          <div class="mini">Pícale al meme para cambiarlo. Y hay un secreto escondido en esta página 👀</div>
+      <span class="badge">Pícale abajo para ver más cositas 💌</span>
 
-          <div class="memeBox">
-            <div class="memeArt" id="memeArt">🇲🇽😂</div>
-            <div class="memeText" id="memeText">
-              “Cuando dices <b>‘ahorita’</b>… y se convierte en mañana” 😭
-              <span class="tiny">Pícale para que cambie y suelte frases.</span>
-            </div>
-          </div>
-
-          <div class="mini" style="margin-top:10px;">
-            Frases de fondo tipo México: <b>“NO MAMES”</b>, <b>“QUE PEDO”</b>, <b>“NI MODO”</b>… (se mueven solas) 😛
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>🐍 Snake en Caja (muere si toca pared)</h3>
-          <div class="mini">Flechas (↑ ↓ ← →). Come cajitas 📦. Creces. Si tocas la pared = 💀</div>
-
-          <canvas id="snake" width="900" height="360"></canvas>
-
-          <div class="stats">
-            <div class="stat">Puntos: <b id="score">0</b></div>
-            <div class="stat">Récord: <b id="best">0</b></div>
-            <div class="stat">Estado: <b id="state">listo</b></div>
-          </div>
-
-          <div class="row" style="justify-content:flex-start;">
-            <button class="btn btnC" id="playSnake">Jugar ▶</button>
-            <button class="btn btnB" id="resetSnake">Reiniciar ⟲</button>
-          </div>
-
-          <div class="musicBox">
-            <div class="mini"><b>Música:</b> Grupo Frontera, Fuerza Regida — COQUETA (Letra Oficial)</div>
-            <div class="mini">Si el navegador bloquea autoplay, dale play manual.</div>
-            <div class="ytWrap">
-              <iframe
-                src="https://www.youtube.com/embed/nNUiVCKu_9Y?autoplay=0&mute=0&controls=1&rel=0"
-                title="COQUETA - Grupo Frontera, Fuerza Regida"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
-
-        </div>
+      <div class="button-row">
+        <button class="small-btn" id="slangBtn">Frase coqueta 😏</button>
+        <button class="small-btn" id="complimentBtn">Otro detalle 💖</button>
+        <button class="small-btn" id="goGameBtn">Mini juego 🎮</button>
       </div>
-    </section>
 
-    <footer>
-      Hecho por <b>OMGL1TZX</b> — viva México 😛🇲🇽
-    </footer>
-  </main>
+      <div class="footer-note">
+        Hay un secreto escondido por aquí 👀
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen3">
+    <div class="card">
+      <h2 style="margin: 18px 0 10px;">Mini juego para <span class="name-glow">Kami</span> 🎮</h2>
+      <p class="sub" style="margin-bottom:12px;">
+        Toca los corazones 💖 y evita las estrellitas azules ✨<br>
+        Llegando a <b>12 puntos</b> sale una sorpresa.
+      </p>
+
+      <div class="game-wrap">
+        <div class="hud">
+          <div class="pill">Puntos: <span id="score">0</span></div>
+          <div class="pill">Vidas: <span id="lives">3</span></div>
+          <div class="pill">Meta: 12</div>
+        </div>
+
+        <div id="gameArea"></div>
+      </div>
+
+      <div class="button-row" style="margin-top:12px;">
+        <button class="small-btn" id="restartGameBtn">Reiniciar 🔄</button>
+        <button class="small-btn" id="backLoveBtn">Volver 💌</button>
+      </div>
+
+      <div class="tiny">
+        Está hecho para teléfono: solo toca la pantalla.
+      </div>
+    </div>
+  </section>
+
+  <div class="popup-msg" id="popup"></div>
+  <div class="secret-banner" id="secretBanner">🇲🇽 Viva Méxicooo, Kami 🇲🇽</div>
+
+  <!-- 
+    PEGA TU MÚSICA AQUÍ:
+    En src="" pon tu link directo de audio .mp3 si tienes uno.
+    Si tu link es de YouTube, normalmente no jala directo en audio.
+    Puedes dejarlo vacío por mientras.
+  -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="" type="audio/mpeg" />
+  </audio>
 
   <script>
-    // Slang background
-    const slangWords = [
-      "NO MAMES","AHORITA","ALV","WEY","CHIDO","QUE PEDO",
-      "SIMÓN","NEL","A LA VERGA","TIRA PARO","YA MERITO",
-      "PURO COTORREO","TA' CABRÓN","NI MODO","YA VALIÓ"
-    ];
-    const slang = document.getElementById("slang");
-    for(let i=0;i<26;i++){
-      const sp = document.createElement("span");
-      sp.textContent = slangWords[Math.floor(Math.random()*slangWords.length)];
-      sp.style.left = (Math.random()*100) + "vw";
-      sp.style.animationDuration = (7 + Math.random()*12) + "s";
-      sp.style.animationDelay = (Math.random()*8) + "s";
-      sp.style.fontSize = (12 + Math.random()*22) + "px";
-      slang.appendChild(sp);
-    }
+    const screen1 = document.getElementById("screen1");
+    const screen2 = document.getElementById("screen2");
+    const screen3 = document.getElementById("screen3");
 
-    // Toast
-    const toast = document.getElementById("toast");
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add("show");
-      setTimeout(()=>toast.classList.remove("show"), 1400);
-    }
+    const startBtn = document.getElementById("startBtn");
+    const slangBtn = document.getElementById("slangBtn");
+    const complimentBtn = document.getElementById("complimentBtn");
+    const goGameBtn = document.getElementById("goGameBtn");
+    const backLoveBtn = document.getElementById("backLoveBtn");
+    const restartGameBtn = document.getElementById("restartGameBtn");
 
-    // Confetti
-    const fx = document.getElementById("fx");
-    function confetti(){
-      fx.classList.add("show");
-      fx.innerHTML = "";
-      const colors = [
-        "rgba(255,77,136,.95)",
-        "rgba(34,211,238,.95)",
-        "rgba(139,92,246,.95)",
-        "rgba(255,255,255,.85)",
-        "rgba(255,190,11,.9)"
-      ];
-      for(let i=0;i<130;i++){
-        const c = document.createElement("i");
-        c.style.left = (Math.random()*100) + "vw";
-        c.style.background = colors[Math.floor(Math.random()*colors.length)];
-        c.style.animationDuration = (1.7 + Math.random()*1.8) + "s";
-        c.style.animationDelay = (Math.random()*0.12) + "s";
-        fx.appendChild(c);
-      }
-      setTimeout(()=>{ fx.classList.remove("show"); fx.innerHTML=""; }, 2400);
-    }
+    const phraseBox = document.getElementById("phraseBox");
+    const popup = document.getElementById("popup");
+    const typingText = document.getElementById("typingText");
+    const bgWords = document.getElementById("bgWords");
+    const secretTap = document.getElementById("secretTap");
+    const secretBanner = document.getElementById("secretBanner");
+    const bgMusic = document.getElementById("bgMusic");
 
-    // Buttons
-    const lootItems = ["🌮 Taco legendario","🩴 Chancla +10 respeto","🧃 Agua fresca","😈 Indirecta épica","🤡 Payasada rara"];
-    const msgs = [
-      "¿Qué pedo wey? 😛",
-      "Ahorita… (mentira) 😭",
-      "No mames qué chido 🔥",
-      "Ni modo, así es 😂",
-      "Viva México cabrones 🇲🇽"
-    ];
-    document.getElementById("btnLoot").onclick = ()=>{ showToast("Loot: " + lootItems[Math.floor(Math.random()*lootItems.length)]); confetti(); };
-    document.getElementById("btnMsg").onclick  = ()=>{ showToast(msgs[Math.floor(Math.random()*msgs.length)]); };
-    document.getElementById("btnBoom").onclick = ()=>{ showToast("🎉 VIVA MÉXICO"); confetti(); };
+    const scoreEl = document.getElementById("score");
+    const livesEl = document.getElementById("lives");
+    const gameArea = document.getElementById("gameArea");
 
-    // Meme click
-    const memeArt = document.getElementById("memeArt");
-    const memeText = document.getElementById("memeText");
-    const memeFaces = ["🇲🇽😂","🩴💀","🌮😈","🧃😛","🔥🇲🇽","🤠🇲🇽"];
-    const memeLines = [
-      "“Cuando dices <b>‘ahorita’</b>… y se convierte en mañana” 😭",
-      "“Yo no fui… (sí fui)” 🤡",
-      "“No mames, qué calor” 🥵",
-      "“Tira paro y comparte” 😈",
-      "“Ni modo… pero con estilo” 😛"
-    ];
-    memeArt.onclick = ()=>{
-      memeArt.textContent = memeFaces[Math.floor(Math.random()*memeFaces.length)];
-      memeText.innerHTML = memeLines[Math.floor(Math.random()*memeLines.length)] + '<span class="tiny">Sigue picándole 😭</span>';
-      showToast("Meme cambiado 😭");
-    };
-
-    // Secret hotspot shows hidden image
-    document.getElementById("secretHotspot").onclick = ()=>{
-      document.getElementById("secretModal").classList.add("show");
-      showToast("Encontraste el secreto 👀");
-      confetti();
-    };
-
-    // -------- Snake in a Box (dies on walls) --------
-    const canvas = document.getElementById("snake");
-    const ctx = canvas.getContext("2d");
-
-    const cell = 18;
-    const cols = Math.floor(canvas.width / cell);
-    const rows = Math.floor(canvas.height / cell);
-
-    let running = false;
-    let dir = {x:1,y:0};
-    let nextDir = {x:1,y:0};
-    let snake = [];
-    let boxFood = {x:10,y:10};
+    let tapCount = 0;
+    let popupTimer;
+    let gameInterval;
     let score = 0;
-    let best = Number(localStorage.getItem("best_boxsnake") || 0);
-    document.getElementById("best").textContent = best;
+    let lives = 3;
+    let playing = false;
 
-    function newFood(){
-      let f;
-      while(true){
-        f = {x: Math.floor(Math.random()*cols), y: Math.floor(Math.random()*rows)};
-        if(!snake.some(s=>s.x===f.x && s.y===f.y)) break;
+    const introText = "Pícale al botón y mira todo lo que te preparé, Kami 💕";
+    const sweetPhrases = [
+      "La neta, Kami, te ves bien bonita 💖",
+      "Eres mi favorita, chiquita ✨",
+      "Andas bien hermosa, no inventes 😌",
+      "Tú sí me pones de buenas bien fácil 💘",
+      "Traes una vibra bien linda, la neta 💫",
+      "Nomás apareces y se pone bonito el día 🌷",
+      "Kami, tú eres puro encanto 💕",
+      "Tienes algo que me encanta machín 😍"
+    ];
+
+    const slangLines = [
+      "Ay Kami, te ves bien preciosa, neta 😏",
+      "Estás bien chula, me traes bien menso 💘",
+      "No inventes, tú sí estás de otro nivel 😮‍💨",
+      "Bien guapa y bien coqueta, así cómo no 🫶",
+      "Tú sí me aceleras el cora, chiquita 💓",
+      "Andas bien hermosa, me encantas machin ✨",
+      "Con esa carita, cualquiera se enamora 💕",
+      "Nomás tú y ya se arregló el mood del día 😌"
+    ];
+
+    const surpriseMessages = [
+      "Kami desbloqueó una sonrisa nueva 💖",
+      "Eres un detallito bonito del universo ✨",
+      "Te hice esto pa' que te acuerdes que vales mucho 💘",
+      "La neta sí quedaste bien presente en mi mente 😌",
+      "Modo consentida activado 💕",
+      "Tú haces que todo se vea más bonito 🌷",
+      "Aparte de linda, traes una vibra bien especial 💫"
+    ];
+
+    function typeWriter(text, i = 0) {
+      if (i <= text.length) {
+        typingText.textContent = text.slice(0, i);
+        setTimeout(() => typeWriter(text, i + 1), 36);
       }
-      boxFood = f;
     }
 
-    function resetSnake(){
-      running = false;
-      score = 0;
-      snake = [
-        {x: Math.floor(cols/2), y: Math.floor(rows/2)},
-        {x: Math.floor(cols/2)-1, y: Math.floor(rows/2)},
-        {x: Math.floor(cols/2)-2, y: Math.floor(rows/2)}
+    function showPopup(text) {
+      clearTimeout(popupTimer);
+      popup.textContent = text;
+      popup.classList.add("show");
+      popupTimer = setTimeout(() => {
+        popup.classList.remove("show");
+      }, 2600);
+    }
+
+    function switchScreen(showScreen) {
+      [screen1, screen2, screen3].forEach(s => s.classList.remove("active"));
+      showScreen.classList.add("active");
+    }
+
+    function launchHearts(amount = 16) {
+      for (let i = 0; i < amount; i++) {
+        const h = document.createElement("div");
+        h.className = "floating-heart";
+        h.textContent = Math.random() > 0.2 ? "💖" : "💗";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.bottom = "-30px";
+        h.style.fontSize = (16 + Math.random() * 22) + "px";
+        h.style.animationDuration = (4 + Math.random() * 3) + "s";
+        h.style.animationDelay = (Math.random() * 1.3) + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 8000);
+      }
+    }
+
+    function launchStars(amount = 8) {
+      for (let i = 0; i < amount; i++) {
+        const s = document.createElement("div");
+        s.className = "floating-star";
+        s.textContent = Math.random() > 0.5 ? "✨" : "⭐";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.bottom = "-20px";
+        s.style.fontSize = (12 + Math.random() * 10) + "px";
+        s.style.animationDuration = (4.5 + Math.random() * 2.5) + "s";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 7800);
+      }
+    }
+
+    function randomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function updatePhrase(text) {
+      phraseBox.animate(
+        [
+          { transform: "scale(0.92)", opacity: 0.35 },
+          { transform: "scale(1.04)", opacity: 1 },
+          { transform: "scale(1)", opacity: 1 }
+        ],
+        { duration: 420, easing: "ease" }
+      );
+      phraseBox.textContent = text;
+    }
+
+    function createBgWords() {
+      const words = [
+        "preciosa",
+        "chiquita",
+        "coqueta",
+        "hermosa",
+        "Kami",
+        "bonita",
+        "linda",
+        "viva mexico",
+        "qué linda",
+        "mi favorita"
       ];
-      dir = {x:1,y:0};
-      nextDir = {x:1,y:0};
-      newFood();
-      document.getElementById("score").textContent = score;
-      document.getElementById("state").textContent = "listo";
-      draw();
-    }
 
-    function draw(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-
-      // background
-      ctx.fillStyle = "rgba(0,0,0,.20)";
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-
-      // border glow box
-      ctx.strokeStyle = "rgba(255,255,255,.25)";
-      ctx.lineWidth = 3;
-      ctx.strokeRect(2,2,canvas.width-4,canvas.height-4);
-
-      // food box 📦
-      const fx = boxFood.x*cell;
-      const fy = boxFood.y*cell;
-      ctx.fillStyle = "rgba(255,190,11,.95)";
-      ctx.fillRect(fx+2, fy+2, cell-4, cell-4);
-      ctx.fillStyle = "rgba(0,0,0,.35)";
-      ctx.fillRect(fx+6, fy+6, cell-12, cell-12);
-      ctx.fillStyle = "rgba(255,255,255,.85)";
-      ctx.font = "14px system-ui";
-      ctx.fillText("📦", fx+1, fy+16);
-
-      // snake
-      for(let i=0;i<snake.length;i++){
-        const s = snake[i];
-        ctx.fillStyle = (i===0) ? "rgba(34,211,238,.95)" : "rgba(139,92,246,.85)";
-        ctx.fillRect(s.x*cell+1, s.y*cell+1, cell-2, cell-2);
-      }
-
-      ctx.fillStyle = "rgba(255,255,255,.55)";
-      ctx.font = "14px system-ui";
-      ctx.fillText("Flechas = mover. Come 📦. Toca pared = 💀", 14, 22);
-    }
-
-    function gameOver(){
-      running = false;
-      document.getElementById("state").textContent = "perdiste 💀";
-      showToast("Te mató la pared 😭");
-      if(score > best){
-        best = score;
-        localStorage.setItem("best_boxsnake", String(best));
-        document.getElementById("best").textContent = best;
-        confetti();
-        showToast("Nuevo récord 🔥");
+      for (let i = 0; i < 18; i++) {
+        const w = document.createElement("span");
+        w.textContent = randomItem(words);
+        w.style.left = Math.random() * 90 + "vw";
+        w.style.top = (20 + Math.random() * 100) + "vh";
+        w.style.fontSize = (14 + Math.random() * 18) + "px";
+        w.style.animationDuration = (10 + Math.random() * 8) + "s";
+        w.style.animationDelay = (Math.random() * 6) + "s";
+        bgWords.appendChild(w);
       }
     }
 
-    function step(){
-      if(!running) return;
-
-      dir = nextDir;
-      const head = snake[0];
-      const newHead = {x: head.x + dir.x, y: head.y + dir.y};
-
-      // DIE if touching walls (the box border)
-      if(newHead.x < 0 || newHead.y < 0 || newHead.x >= cols || newHead.y >= rows){
-        gameOver(); return;
+    async function tryPlayMusic() {
+      try {
+        await bgMusic.play();
+      } catch (e) {
+        // Si no hay música o el navegador la bloquea, no pasa nada.
       }
-      // self hit
-      if(snake.some(s=>s.x===newHead.x && s.y===newHead.y)){
-        gameOver(); return;
-      }
-
-      snake.unshift(newHead);
-
-      // eat box -> grow (do not pop)
-      if(newHead.x === boxFood.x && newHead.y === boxFood.y){
-        score += 1;
-        document.getElementById("score").textContent = score;
-        showToast("📦 +1  (creciste)");
-        if(score % 5 === 0){ confetti(); showToast("Racha 🔥"); }
-        newFood();
-      } else {
-        snake.pop();
-      }
-
-      draw();
-
-      // speed increases (fun)
-      const speed = Math.max(55, 140 - score*5);
-      setTimeout(step, speed);
     }
 
-    window.addEventListener("keydown", (e)=>{
-      const k = e.key;
-      if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(k)) e.preventDefault();
+    startBtn.addEventListener("click", async () => {
+      startBtn.animate(
+        [
+          { transform: "scale(1)", filter: "brightness(1)" },
+          { transform: "scale(1.15)", filter: "brightness(1.2)" },
+          { transform: "scale(0.98)", filter: "brightness(1)" },
+          { transform: "scale(1)" }
+        ],
+        { duration: 700, easing: "ease" }
+      );
 
-      // prevent reversing
-      if(k==="ArrowUp" && dir.y!==1) nextDir = {x:0,y:-1};
-      if(k==="ArrowDown" && dir.y!==-1) nextDir = {x:0,y:1};
-      if(k==="ArrowLeft" && dir.x!==1) nextDir = {x:-1,y:0};
-      if(k==="ArrowRight" && dir.x!==-1) nextDir = {x:1,y:0};
-    }, {passive:false});
+      document.body.animate(
+        [
+          { filter: "saturate(1)" },
+          { filter: "saturate(1.35)" },
+          { filter: "saturate(1.1)" }
+        ],
+        { duration: 900, easing: "ease" }
+      );
 
-    document.getElementById("playSnake").onclick = ()=>{
-      if(running) return;
-      running = true;
-      document.getElementById("state").textContent = "jugando";
-      showToast("A darle 🐍📦");
-      step();
-    };
-    document.getElementById("resetSnake").onclick = ()=>{ resetSnake(); showToast("Reiniciado ⟲"); };
+      launchHearts(22);
+      launchStars(10);
+      await tryPlayMusic();
 
-    resetSnake();
+      setTimeout(() => {
+        switchScreen(screen2);
+        updatePhrase("Kami, te hice esto para sacarte una sonrisa bien bonita 💖");
+        showPopup("Entraste al modo especial de Kami ✨");
+      }, 520);
+    });
+
+    slangBtn.addEventListener("click", () => {
+      const text = randomItem(slangLines);
+      updatePhrase(text);
+      launchHearts(8);
+      showPopup("Uy 😏 salió una frase coquetona");
+    });
+
+    complimentBtn.addEventListener("click", () => {
+      const text = randomItem(surpriseMessages);
+      updatePhrase(text);
+      launchStars(7);
+      showPopup("Otro detallito para ti 💌");
+    });
+
+    goGameBtn.addEventListener("click", () => {
+      switchScreen(screen3);
+      startGame();
+      launchHearts(10);
+      showPopup("A jugar, Kami 🎮");
+    });
+
+    backLoveBtn.addEventListener("click", () => {
+      stopGame();
+      switchScreen(screen2);
+      showPopup("Volviste a las sorpresitas 💖");
+    });
+
+    restartGameBtn.addEventListener("click", () => {
+      startGame();
+      showPopup("Juego reiniciado 🔄");
+    });
+
+    secretTap.addEventListener("click", () => {
+      tapCount++;
+      secretTap.animate(
+        [
+          { transform: "scale(1)" },
+          { transform: "scale(1.1)" },
+          { transform: "scale(1)" }
+        ],
+        { duration: 230 }
+      );
+
+      if (tapCount >= 5) {
+        tapCount = 0;
+        secretBanner.style.display = "block";
+        launchHearts(14);
+        launchStars(10);
+        showPopup("Secreto desbloqueado 🇲🇽");
+        setTimeout(() => {
+          secretBanner.style.display = "none";
+        }, 2800);
+      }
+    });
+
+    function startGame() {
+      stopGame();
+      score = 0;
+      lives = 3;
+      playing = true;
+      scoreEl.textContent = score;
+      livesEl.textContent = lives;
+      gameArea.innerHTML = "";
+
+      gameInterval = setInterval(() => {
+        if (!playing) return;
+        spawnTarget(Math.random() > 0.28 ? "good" : "bad");
+      }, 700);
+    }
+
+    function stopGame() {
+      playing = false;
+      clearInterval(gameInterval);
+      const existing = gameArea.querySelectorAll(".target");
+      existing.forEach(el => el.remove());
+    }
+
+    function spawnTarget(type) {
+      const size = 54;
+      const target = document.createElement("button");
+      target.className = "target " + (type === "good" ? "heart-target" : "bad-target");
+      target.setAttribute("aria-label", type === "good" ? "heart" : "bad");
+      target.textContent = type === "good" ? "💖" : "✨";
+
+      const maxX = gameArea.clientWidth - size - 8;
+      const maxY = gameArea.clientHeight - size - 8;
+      const x = 4 + Math.random() * maxX;
+      const y = 4 + Math.random() * maxY;
+
+      target.style.left = x + "px";
+      target.style.top = y + "px";
+
+      target.addEventListener("click", () => {
+        if (!playing) return;
+
+        if (type === "good") {
+          score++;
+          scoreEl.textContent = score;
+          launchHearts(5);
+          showPopup(randomItem([
+            "Esooo, bien jugado 💖",
+            "Kami sumó amorcito ✨",
+            "Punto para la más bonita 💘"
+          ]));
+        } else {
+          lives--;
+          livesEl.textContent = lives;
+          launchStars(4);
+          showPopup(randomItem([
+            "Uy, esa no 😅",
+            "Casi, casi 👀",
+            "Esa era trampa ✨"
+          ]));
+        }
+
+        target.remove();
+        checkGameState();
+      });
+
+      gameArea.appendChild(target);
+
+      setTimeout(() => {
+        if (target.parentNode) {
+          target.remove();
+        }
+      }, 1200);
+    }
+
+    function checkGameState() {
+      if (score >= 12) {
+        stopGame();
+        launchHearts(30);
+        updatePhrase("Kami ganó el mini juego porque está bien chingonaaa 💖🎉");
+        switchScreen(screen2);
+        showPopup("Ganasteee, Kami 🏆💘");
+      }
+
+      if (lives <= 0) {
+        stopGame();
+        showPopup("Te gané por poquito 😌 inténtalo otra vez");
+      }
+    }
+
+    createBgWords();
+    typeWriter(introText);
+    setInterval(() => {
+      launchHearts(2);
+    }, 2200);
   </script>
 </body>
 </html>
