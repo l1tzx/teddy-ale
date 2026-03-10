@@ -2,55 +2,50 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Para Kami 💖</title>
   <style>
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
+      -webkit-user-select: none;
     }
 
     :root {
-      --bg1: #120018;
-      --bg2: #2b0035;
       --pink: #ff4fa3;
       --hotpink: #ff1f8f;
-      --purple: #8a2eff;
-      --cyan: #5cf3ff;
-      --gold: #ffd166;
-      --white: #ffffff;
-      --glass: rgba(255, 255, 255, 0.1);
-      --glass-2: rgba(255, 255, 255, 0.15);
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --purple: #7b2fff;
+      --blue: #6ce7ff;
+      --white: #fff;
+      --glass: rgba(255,255,255,.12);
+      --glass2: rgba(255,255,255,.08);
+      --shadow: 0 12px 35px rgba(0,0,0,.28);
     }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(-45deg, var(--bg1), var(--bg2), #240046, #3a0ca3);
-      background-size: 400% 400%;
-      animation: bgMove 14s ease infinite;
+      font-family: Arial, Helvetica, sans-serif;
       color: white;
+      background:
+        radial-gradient(circle at top left, rgba(255,79,163,.22), transparent 30%),
+        radial-gradient(circle at top right, rgba(108,231,255,.16), transparent 30%),
+        linear-gradient(135deg, #140019, #240046, #1b0031, #3a0ca3);
+      background-size: 300% 300%;
+      animation: bgMove 14s ease infinite;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
+    body.gallery-mode {
       background:
-        radial-gradient(circle at 20% 20%, rgba(255, 79, 163, 0.18), transparent 25%),
-        radial-gradient(circle at 80% 25%, rgba(92, 243, 255, 0.15), transparent 25%),
-        radial-gradient(circle at 50% 85%, rgba(138, 46, 255, 0.18), transparent 30%);
-      pointer-events: none;
-      z-index: 0;
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.12), transparent 20%),
+        radial-gradient(circle at 80% 30%, rgba(255,79,163,.20), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(108,231,255,.14), transparent 25%),
+        linear-gradient(135deg, #120018, #2a003c, #4b134f, #1f4068);
+      background-size: 300% 300%;
+      animation: bgMove 12s ease infinite;
     }
 
     @keyframes bgMove {
@@ -65,8 +60,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 18px;
-      z-index: 2;
+      padding: 16px;
     }
 
     .screen.active {
@@ -75,130 +69,102 @@
 
     .card {
       width: min(100%, 430px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.08));
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.07));
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(15px);
       box-shadow: var(--shadow);
-      padding: 20px 18px 22px;
+      padding: 18px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      animation: cardIn 0.9s ease;
+      animation: cardIn .8s ease;
+      z-index: 10;
     }
 
     @keyframes cardIn {
-      0% { transform: translateY(30px) scale(0.92); opacity: 0; }
-      100% { transform: translateY(0) scale(1); opacity: 1; }
-    }
-
-    .sparkle {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      filter: blur(1px);
-      animation: twinkle 2.2s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { transform: scale(0.4); opacity: 0.3; }
-      50% { transform: scale(1.3); opacity: 1; }
+      from { transform: translateY(30px) scale(.94); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
     }
 
     .logo {
-      position: absolute;
+      position: fixed;
       top: 14px;
       left: 14px;
-      font-size: 13px;
-      letter-spacing: 1px;
+      z-index: 50;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: 0 0 15px rgba(255,79,163,0.25);
-      z-index: 5;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      font-size: 13px;
+      box-shadow: 0 0 20px rgba(255,79,163,.2);
     }
 
-    .mini-note {
-      position: absolute;
-      top: 15px;
-      right: 14px;
-      font-size: 12px;
-      color: #ffe7f3;
-      opacity: 0.85;
-      z-index: 5;
-      background: rgba(0,0,0,0.18);
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
+    .name {
+      color: #ffd9ea;
+      text-shadow: 0 0 12px rgba(255,79,163,.5);
+    }
+
+    h1, h2 {
+      margin: 18px 0 10px;
+      line-height: 1.05;
     }
 
     h1 {
-      margin: 35px 0 10px;
       font-size: 2.2rem;
-      line-height: 1.05;
-      text-shadow: 0 0 15px rgba(255,79,163,0.35);
     }
 
-    .name-glow {
-      display: inline-block;
-      color: #ffd8ec;
-      text-shadow:
-        0 0 8px rgba(255,255,255,0.65),
-        0 0 22px rgba(255,79,163,0.45),
-        0 0 38px rgba(138,46,255,0.35);
-      animation: pulseGlow 2.4s infinite ease-in-out;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+    h2 {
+      font-size: 2rem;
     }
 
     .sub {
-      font-size: 1rem;
+      color: #ffeef7;
       line-height: 1.45;
-      color: #f9e8f5;
-      margin: 0 auto 16px;
+      font-size: 1rem;
+      margin: 0 auto 14px;
       max-width: 330px;
     }
 
-    .big-btn,
-    .small-btn {
-      border: none;
-      cursor: pointer;
-      color: white;
-      font-weight: 700;
-      border-radius: 999px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    .typing {
+      min-height: 56px;
+      margin: 10px auto 16px;
+      max-width: 320px;
+      color: #fff7fb;
+      font-size: 1.03rem;
+      line-height: 1.45;
     }
 
-    .big-btn:active,
-    .small-btn:active {
-      transform: scale(0.95);
+    button {
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      border-radius: 999px;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    button:active {
+      transform: scale(.95);
     }
 
     .big-btn {
       padding: 16px 24px;
+      font-size: 1.08rem;
       min-width: 230px;
-      font-size: 1.1rem;
       background: linear-gradient(90deg, var(--hotpink), var(--purple));
-      box-shadow: 0 10px 28px rgba(255,31,143,0.35), 0 0 20px rgba(138,46,255,0.25);
-      margin-top: 12px;
+      box-shadow: 0 10px 28px rgba(255,31,143,.35);
     }
 
     .small-btn {
-      padding: 12px 18px;
-      font-size: 0.96rem;
-      background: linear-gradient(90deg, #ff6fb3, #7c4dff);
-      box-shadow: 0 8px 20px rgba(255,79,163,0.25);
+      padding: 12px 16px;
+      font-size: .94rem;
+      background: linear-gradient(90deg, #ff72b8, #8058ff);
+      box-shadow: 0 8px 18px rgba(255,79,163,.22);
       margin: 6px;
     }
 
-    .button-row {
+    .row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -206,95 +172,208 @@
       margin-top: 10px;
     }
 
-    .typing {
-      min-height: 60px;
-      font-size: 1.08rem;
-      line-height: 1.4;
-      margin: 12px auto 4px;
-      max-width: 330px;
-      color: #fff4fb;
+    .note {
+      font-size: .85rem;
+      opacity: .86;
+      margin-top: 10px;
+      color: #ffe7f2;
     }
 
-    .love-title {
-      font-size: 2.6rem;
-      line-height: 1;
-      margin: 50px 0 10px;
-      animation: floatText 2.5s ease-in-out infinite;
-      text-shadow:
-        0 0 12px rgba(255,255,255,0.4),
-        0 0 24px rgba(255,79,163,0.45),
-        0 0 36px rgba(138,46,255,0.3);
-    }
-
-    @keyframes floatText {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    .cute-box {
-      margin: 14px auto 10px;
+    .love-box {
       width: 100%;
-      max-width: 345px;
-      padding: 16px;
+      max-width: 340px;
+      min-height: 90px;
+      margin: 14px auto 0;
       border-radius: 20px;
-      background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(255,255,255,0.14);
-      min-height: 94px;
+      padding: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.03rem;
-      line-height: 1.5;
-      box-shadow: inset 0 0 18px rgba(255,255,255,0.06);
+      line-height: 1.45;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.13);
+      box-shadow: inset 0 0 18px rgba(255,255,255,.04);
     }
 
-    .badge {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      background: rgba(255, 209, 102, 0.14);
-      border: 1px solid rgba(255,209,102,0.35);
-      color: #ffe9b3;
+    .floating {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      animation: rise linear forwards;
     }
 
-    .game-wrap {
-      margin-top: 10px;
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(.8);
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    .popup {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(10,10,20,.88);
+      border: 1px solid rgba(255,255,255,.15);
+      padding: 14px 18px;
+      border-radius: 18px;
+      z-index: 100;
+      max-width: 88vw;
+      text-align: center;
+      opacity: 0;
+      transition: .35s ease;
+      box-shadow: 0 12px 26px rgba(0,0,0,.28);
+      font-size: .96rem;
+    }
+
+    .popup.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .gallery-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      display: none;
+    }
+
+    .gallery-bg.active {
+      display: block;
+    }
+
+    .photo {
+      position: absolute;
+      width: 125px;
+      height: 165px;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 2px solid rgba(255,255,255,.22);
+      box-shadow: 0 10px 26px rgba(0,0,0,.28);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+      animation: floatPic 5s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    .photo:active {
+      transform: scale(.96);
+    }
+
+    .photo:hover {
+      box-shadow: 0 12px 30px rgba(255,79,163,.25);
+    }
+
+    .p1 { left: 6%; top: 12%; transform: rotate(-8deg); animation-delay: .2s; }
+    .p2 { right: 7%; top: 18%; transform: rotate(8deg); animation-delay: .8s; }
+    .p3 { left: 50%; bottom: 14%; transform: translateX(-50%) rotate(-2deg); animation-delay: 1.2s; }
+
+    @keyframes floatPic {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -8px; }
+    }
+
+    .spark {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      opacity: .7;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%,100% { transform: scale(.5); opacity: .25; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+
+    .sticker {
+      position: absolute;
+      font-size: 30px;
+      z-index: 5;
+      cursor: grab;
+      touch-action: none;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
+      animation: wiggle 3s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%,100% { transform: rotate(0deg); }
+      25% { transform: rotate(-8deg); }
+      75% { transform: rotate(8deg); }
+    }
+
+    .bg-words {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-words span {
+      position: absolute;
+      color: rgba(255,255,255,.08);
+      font-weight: 800;
+      white-space: nowrap;
+      animation: driftWord linear infinite;
+    }
+
+    @keyframes driftWord {
+      from { transform: translateY(25px); opacity: 0; }
+      12%,88% { opacity: 1; }
+      to { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    .game-card {
+      width: min(100%, 430px);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.07));
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(15px);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      text-align: center;
+      z-index: 10;
     }
 
     .hud {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       gap: 8px;
-      margin-bottom: 10px;
-      font-size: 0.95rem;
       flex-wrap: wrap;
+      margin-bottom: 10px;
+      font-size: .94rem;
     }
 
     .pill {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 999px;
       padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.14);
       min-width: 92px;
     }
 
     #gameArea {
-      position: relative;
       width: 100%;
       max-width: 350px;
-      height: 400px;
+      height: 380px;
       margin: 0 auto;
+      position: relative;
       border-radius: 24px;
       overflow: hidden;
       background:
-        radial-gradient(circle at top, rgba(255,255,255,0.12), transparent 30%),
-        linear-gradient(180deg, rgba(255, 79, 163, 0.16), rgba(92, 243, 255, 0.08)),
-        rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: inset 0 0 30px rgba(255,255,255,0.05);
-      touch-action: manipulation;
+        radial-gradient(circle at top, rgba(255,255,255,.12), transparent 30%),
+        linear-gradient(180deg, rgba(255,79,163,.15), rgba(108,231,255,.08)),
+        rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.16);
     }
 
     .target {
@@ -306,317 +385,227 @@
       align-items: center;
       justify-content: center;
       font-size: 28px;
-      animation: popIn 0.25s ease;
+      border: none;
       cursor: pointer;
-      filter: drop-shadow(0 8px 10px rgba(0,0,0,0.18));
+      animation: popIn .22s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,.2);
+    }
+
+    .good {
+      background: radial-gradient(circle at 30% 30%, #ffd8ea, #ff4fa3 60%, #f40076);
+    }
+
+    .bad {
+      background: radial-gradient(circle at 30% 30%, #d8f7ff, #6ce7ff 60%, #118ab2);
     }
 
     @keyframes popIn {
-      0% { transform: scale(0.2) rotate(-15deg); opacity: 0; }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
-    }
-
-    .heart-target {
-      background: radial-gradient(circle at 30% 30%, #ffd6ea, #ff4fa3 60%, #f40076);
-      box-shadow: 0 0 18px rgba(255,79,163,0.45);
-    }
-
-    .bad-target {
-      background: radial-gradient(circle at 30% 30%, #d7f8ff, #5cf3ff 60%, #118ab2);
-      box-shadow: 0 0 18px rgba(92,243,255,0.4);
-    }
-
-    .popup-msg {
-      position: fixed;
-      left: 50%;
-      bottom: 24px;
-      transform: translateX(-50%) translateY(20px);
-      background: rgba(10, 10, 20, 0.85);
-      color: white;
-      padding: 14px 18px;
-      border-radius: 18px;
-      font-size: 0.96rem;
-      max-width: 88vw;
-      text-align: center;
-      z-index: 20;
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: 0 12px 26px rgba(0,0,0,0.3);
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.35s ease;
-    }
-
-    .popup-msg.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .floating-heart,
-    .floating-star {
-      position: fixed;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.85;
-      animation: rise 6s linear forwards;
-    }
-
-    .floating-heart {
-      font-size: 20px;
-    }
-
-    .floating-star {
-      font-size: 14px;
-      color: #fff4b8;
-    }
-
-    @keyframes rise {
-      0% {
-        transform: translateY(0) scale(0.8) rotate(0deg);
-        opacity: 0;
-      }
-      15% {
-        opacity: 0.95;
-      }
-      100% {
-        transform: translateY(-120vh) scale(1.4) rotate(35deg);
-        opacity: 0;
-      }
+      from { transform: scale(.25); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     .secret-banner {
       position: fixed;
-      inset: auto 14px 16px 14px;
-      background: linear-gradient(90deg, rgba(0,128,0,0.9), rgba(255,255,255,0.92), rgba(255,0,0,0.9));
+      left: 14px;
+      right: 14px;
+      bottom: 16px;
+      z-index: 120;
+      display: none;
+      text-align: center;
       color: #111;
       font-weight: 800;
-      text-align: center;
       padding: 14px;
       border-radius: 18px;
-      z-index: 30;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.28);
-      display: none;
-      animation: bounceIn 0.45s ease;
+      background: linear-gradient(90deg, rgba(0,128,0,.96), rgba(255,255,255,.96), rgba(255,0,0,.96));
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+      animation: popSecret .4s ease;
     }
 
-    @keyframes bounceIn {
-      0% { transform: scale(0.7) translateY(20px); opacity: 0; }
-      70% { transform: scale(1.03); opacity: 1; }
-      100% { transform: scale(1); }
+    @keyframes popSecret {
+      from { transform: scale(.8) translateY(18px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
     }
 
-    .tiny {
-      font-size: 0.82rem;
-      opacity: 0.82;
+    .touch-hint {
+      font-size: .82rem;
+      opacity: .86;
+      color: #ffe6f3;
       margin-top: 8px;
     }
 
-    .music-note {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #ffdff0;
-      opacity: 0.9;
-    }
-
-    .bg-words {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .bg-words span {
-      position: absolute;
-      color: rgba(255,255,255,0.08);
-      font-weight: 800;
-      letter-spacing: 1px;
-      animation: driftWord linear infinite;
-      text-shadow: 0 0 12px rgba(255,255,255,0.08);
-      white-space: nowrap;
-    }
-
-    @keyframes driftWord {
-      from {
-        transform: translateY(20px) translateX(-10px);
-        opacity: 0;
+    @media (max-width: 480px) {
+      .photo {
+        width: 108px;
+        height: 148px;
       }
-      10%, 90% {
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-120vh) translateX(10px);
-        opacity: 0;
-      }
-    }
 
-    .footer-note {
-      margin-top: 12px;
-      font-size: 0.82rem;
-      color: #f9ddea;
-      opacity: 0.85;
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-words" id="bgWords"></div>
-
   <div class="logo" id="secretTap">KAMI MODE 💘</div>
-  <div class="mini-note">hecho con cariño</div>
 
-  <section class="screen active" id="screen1">
+  <div id="screen1" class="screen active">
     <div class="card">
-      <div class="sparkle" style="top:18px;left:26px;"></div>
-      <div class="sparkle" style="top:52px;right:38px;animation-delay:.6s;"></div>
-      <div class="sparkle" style="bottom:70px;left:52px;animation-delay:1.2s;"></div>
+      <div class="spark" style="width:8px;height:8px;top:18px;left:20px;"></div>
+      <div class="spark" style="width:10px;height:10px;top:52px;right:28px;animation-delay:.6s;"></div>
+      <div class="spark" style="width:9px;height:9px;bottom:70px;left:50px;animation-delay:1.1s;"></div>
 
-      <h1>Oye <span class="name-glow">Kami</span> ✨</h1>
+      <h1>Oye <span class="name">Kami</span> ✨</h1>
       <p class="sub">
-        Te hice una paginita bien bonita con animaciones, sorpresas,
-        frases lindas y un mini juego para celular 💖
+        Te hice una página más bonita, con tus fotos, música,
+        animaciones y cositas para que juegues 💖
       </p>
 
       <div class="typing" id="typingText"></div>
 
       <button class="big-btn" id="startBtn">Presióname chiquita</button>
 
-      <div class="music-note">
-        🎵 Cuando me mandes la música, solo pegas el link en el código.
+      <div class="note">
+        Cuando le pique, entra a su mundo especial 💘
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="screen" id="screen2">
+  <div id="screen2" class="screen">
+    <div class="gallery-bg active" id="galleryBg">
+      <div class="bg-words" id="bgWords"></div>
+
+      <img src="kami1.jpg" class="photo p1" id="pic1" alt="Kami foto 1">
+      <img src="kami2.jpg" class="photo p2" id="pic2" alt="Kami foto 2">
+      <img src="kami3.jpg" class="photo p3" id="pic3" alt="Kami foto 3">
+
+      <div class="sticker" id="sticker1" style="left:18px;bottom:130px;">💖</div>
+      <div class="sticker" id="sticker2" style="right:24px;bottom:150px;">✨</div>
+      <div class="sticker" id="sticker3" style="left:40%;top:90px;">😚</div>
+    </div>
+
     <div class="card">
-      <h2 class="love-title">t quiero chiquita 💗</h2>
-
-      <div class="cute-box" id="phraseBox">
-        Eres de esas personas que alegran bonito todo, Kami ✨
+      <h2>t quiero chiquita 💗</h2>
+      <div class="love-box" id="phraseBox">
+        Kami, esta página es para que te la pases bonito y juegues un ratito conmigo 💖
       </div>
 
-      <span class="badge">Pícale abajo para ver más cositas 💌</span>
-
-      <div class="button-row">
+      <div class="row">
         <button class="small-btn" id="slangBtn">Frase coqueta 😏</button>
-        <button class="small-btn" id="complimentBtn">Otro detalle 💖</button>
-        <button class="small-btn" id="goGameBtn">Mini juego 🎮</button>
+        <button class="small-btn" id="detailBtn">Otro detalle 💌</button>
+        <button class="small-btn" id="heartRainBtn">Lluvia de amor 💖</button>
+        <button class="small-btn" id="gameBtn">Mini juego 🎮</button>
       </div>
 
-      <div class="footer-note">
-        Hay un secreto escondido por aquí 👀
+      <div class="touch-hint">
+        Toca las fotos, mueve los stickers y busca el secreto 👀
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="screen" id="screen3">
-    <div class="card">
-      <h2 style="margin: 18px 0 10px;">Mini juego para <span class="name-glow">Kami</span> 🎮</h2>
-      <p class="sub" style="margin-bottom:12px;">
-        Toca los corazones 💖 y evita las estrellitas azules ✨<br>
-        Llegando a <b>12 puntos</b> sale una sorpresa.
+  <div id="screen3" class="screen">
+    <div class="game-card">
+      <h2>Mini juego para Kami 🎮</h2>
+      <p class="sub">
+        Toca los corazones 💖 y evita las azules ✨<br>
+        Si llegas a <b>12 puntos</b>, ganas sorpresa.
       </p>
 
-      <div class="game-wrap">
-        <div class="hud">
-          <div class="pill">Puntos: <span id="score">0</span></div>
-          <div class="pill">Vidas: <span id="lives">3</span></div>
-          <div class="pill">Meta: 12</div>
-        </div>
-
-        <div id="gameArea"></div>
+      <div class="hud">
+        <div class="pill">Puntos: <span id="score">0</span></div>
+        <div class="pill">Vidas: <span id="lives">3</span></div>
+        <div class="pill">Meta: 12</div>
       </div>
 
-      <div class="button-row" style="margin-top:12px;">
-        <button class="small-btn" id="restartGameBtn">Reiniciar 🔄</button>
-        <button class="small-btn" id="backLoveBtn">Volver 💌</button>
+      <div id="gameArea"></div>
+
+      <div class="row" style="margin-top:12px;">
+        <button class="small-btn" id="restartBtn">Reiniciar 🔄</button>
+        <button class="small-btn" id="backBtn">Volver 💌</button>
       </div>
 
-      <div class="tiny">
-        Está hecho para teléfono: solo toca la pantalla.
-      </div>
+      <div class="touch-hint">Hecho fácil para teléfono: solo tocar.</div>
     </div>
-  </section>
+  </div>
 
-  <div class="popup-msg" id="popup"></div>
-  <div class="secret-banner" id="secretBanner">🇲🇽 Viva Méxicooo, Kami 🇲🇽</div>
+  <div class="popup" id="popup"></div>
+  <div class="secret-banner" id="secretBanner">🇲🇽 Viva Méxicooo Kami 🇲🇽</div>
 
-  <!-- 
-    PEGA TU MÚSICA AQUÍ:
-    En src="" pon tu link directo de audio .mp3 si tienes uno.
-    Si tu link es de YouTube, normalmente no jala directo en audio.
-    Puedes dejarlo vacío por mientras.
-  -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="" type="audio/mpeg" />
+  <audio id="bgMusic" loop playsinline>
+    <source src="song.mp4" type="video/mp4">
   </audio>
 
   <script>
     const screen1 = document.getElementById("screen1");
     const screen2 = document.getElementById("screen2");
     const screen3 = document.getElementById("screen3");
-
     const startBtn = document.getElementById("startBtn");
-    const slangBtn = document.getElementById("slangBtn");
-    const complimentBtn = document.getElementById("complimentBtn");
-    const goGameBtn = document.getElementById("goGameBtn");
-    const backLoveBtn = document.getElementById("backLoveBtn");
-    const restartGameBtn = document.getElementById("restartGameBtn");
-
-    const phraseBox = document.getElementById("phraseBox");
-    const popup = document.getElementById("popup");
     const typingText = document.getElementById("typingText");
+    const popup = document.getElementById("popup");
+    const phraseBox = document.getElementById("phraseBox");
+    const slangBtn = document.getElementById("slangBtn");
+    const detailBtn = document.getElementById("detailBtn");
+    const heartRainBtn = document.getElementById("heartRainBtn");
+    const gameBtn = document.getElementById("gameBtn");
+    const backBtn = document.getElementById("backBtn");
+    const restartBtn = document.getElementById("restartBtn");
     const bgWords = document.getElementById("bgWords");
+    const bgMusic = document.getElementById("bgMusic");
     const secretTap = document.getElementById("secretTap");
     const secretBanner = document.getElementById("secretBanner");
-    const bgMusic = document.getElementById("bgMusic");
 
     const scoreEl = document.getElementById("score");
     const livesEl = document.getElementById("lives");
     const gameArea = document.getElementById("gameArea");
 
-    let tapCount = 0;
     let popupTimer;
+    let tapCount = 0;
     let gameInterval;
     let score = 0;
     let lives = 3;
     let playing = false;
 
-    const introText = "Pícale al botón y mira todo lo que te preparé, Kami 💕";
-    const sweetPhrases = [
-      "La neta, Kami, te ves bien bonita 💖",
-      "Eres mi favorita, chiquita ✨",
-      "Andas bien hermosa, no inventes 😌",
-      "Tú sí me pones de buenas bien fácil 💘",
-      "Traes una vibra bien linda, la neta 💫",
-      "Nomás apareces y se pone bonito el día 🌷",
-      "Kami, tú eres puro encanto 💕",
-      "Tienes algo que me encanta machín 😍"
+    const intro = "Pícale al botón, Kami, te espera una página bonita con fotos, música y sorpresitas 💕";
+
+    const slangMessages = [
+      "Ay Kami, estás bien preciosa la neta 😏",
+      "No inventes, tú sí estás bien bonita 💖",
+      "Me traes bien contento, chiquita ✨",
+      "Con esa carita cualquiera cae 😌",
+      "Andas bien hermosa, la verdad 💘",
+      "Tú sí alegraste el día machin 🌷",
+      "Nomás tú y ya se puso bonito todo 💕"
     ];
 
-    const slangLines = [
-      "Ay Kami, te ves bien preciosa, neta 😏",
-      "Estás bien chula, me traes bien menso 💘",
-      "No inventes, tú sí estás de otro nivel 😮‍💨",
-      "Bien guapa y bien coqueta, así cómo no 🫶",
-      "Tú sí me aceleras el cora, chiquita 💓",
-      "Andas bien hermosa, me encantas machin ✨",
-      "Con esa carita, cualquiera se enamora 💕",
-      "Nomás tú y ya se arregló el mood del día 😌"
+    const details = [
+      "Te hice esto para que sonrías un ratito 💌",
+      "Kami, eres una niña bien linda 💖",
+      "Tu vibra se siente bien bonita ✨",
+      "Cada clic aquí tiene cariñito 😚",
+      "Tú haces ver todo más bonito 💘",
+      "Obvio tenías que tener una página especial 🌸"
     ];
 
-    const surpriseMessages = [
-      "Kami desbloqueó una sonrisa nueva 💖",
-      "Eres un detallito bonito del universo ✨",
-      "Te hice esto pa' que te acuerdes que vales mucho 💘",
-      "La neta sí quedaste bien presente en mi mente 😌",
-      "Modo consentida activado 💕",
-      "Tú haces que todo se vea más bonito 🌷",
-      "Aparte de linda, traes una vibra bien especial 💫"
-    ];
+    const picMessages = {
+      pic1: [
+        "Esta foto está bien bonita 😍",
+        "Kami se ve preciosa aquí 💖",
+        "Esta me gustó mucho la neta ✨"
+      ],
+      pic2: [
+        "Esta tiene un estilo bien lindo 🖤",
+        "Se ve bien aesthetic esta foto 😌",
+        "Esta está bien especial 💫"
+      ],
+      pic3: [
+        "JAJA esta está bien chistosa 😂",
+        "Esta foto está top top 😭💖",
+        "La mejor vibra en esta foto jaja 😆"
+      ]
+    };
 
     function typeWriter(text, i = 0) {
       if (i <= text.length) {
         typingText.textContent = text.slice(0, i);
-        setTimeout(() => typeWriter(text, i + 1), 36);
+        setTimeout(() => typeWriter(text, i + 1), 34);
       }
     }
 
@@ -629,174 +618,209 @@
       }, 2600);
     }
 
-    function switchScreen(showScreen) {
+    function switchScreen(screen) {
       [screen1, screen2, screen3].forEach(s => s.classList.remove("active"));
-      showScreen.classList.add("active");
-    }
-
-    function launchHearts(amount = 16) {
-      for (let i = 0; i < amount; i++) {
-        const h = document.createElement("div");
-        h.className = "floating-heart";
-        h.textContent = Math.random() > 0.2 ? "💖" : "💗";
-        h.style.left = Math.random() * 100 + "vw";
-        h.style.bottom = "-30px";
-        h.style.fontSize = (16 + Math.random() * 22) + "px";
-        h.style.animationDuration = (4 + Math.random() * 3) + "s";
-        h.style.animationDelay = (Math.random() * 1.3) + "s";
-        document.body.appendChild(h);
-        setTimeout(() => h.remove(), 8000);
-      }
-    }
-
-    function launchStars(amount = 8) {
-      for (let i = 0; i < amount; i++) {
-        const s = document.createElement("div");
-        s.className = "floating-star";
-        s.textContent = Math.random() > 0.5 ? "✨" : "⭐";
-        s.style.left = Math.random() * 100 + "vw";
-        s.style.bottom = "-20px";
-        s.style.fontSize = (12 + Math.random() * 10) + "px";
-        s.style.animationDuration = (4.5 + Math.random() * 2.5) + "s";
-        document.body.appendChild(s);
-        setTimeout(() => s.remove(), 7800);
-      }
+      screen.classList.add("active");
     }
 
     function randomItem(arr) {
       return arr[Math.floor(Math.random() * arr.length)];
     }
 
-    function updatePhrase(text) {
+    function updateBox(text) {
       phraseBox.animate(
         [
-          { transform: "scale(0.92)", opacity: 0.35 },
+          { transform: "scale(.92)", opacity: .35 },
           { transform: "scale(1.04)", opacity: 1 },
           { transform: "scale(1)", opacity: 1 }
         ],
-        { duration: 420, easing: "ease" }
+        { duration: 380, easing: "ease" }
       );
       phraseBox.textContent = text;
     }
 
+    function makeFloating(char, amount = 12) {
+      for (let i = 0; i < amount; i++) {
+        const el = document.createElement("div");
+        el.className = "floating";
+        el.textContent = char;
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.bottom = "-30px";
+        el.style.fontSize = (16 + Math.random() * 20) + "px";
+        el.style.animationDuration = (4 + Math.random() * 3) + "s";
+        el.style.animationDelay = (Math.random() * 1.1) + "s";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 8000);
+      }
+    }
+
     function createBgWords() {
       const words = [
-        "preciosa",
-        "chiquita",
-        "coqueta",
-        "hermosa",
-        "Kami",
-        "bonita",
-        "linda",
-        "viva mexico",
-        "qué linda",
-        "mi favorita"
+        "Kami", "chiquita", "bonita", "preciosa",
+        "coqueta", "linda", "te quiero", "viva mexico",
+        "hermosa", "mi favorita"
       ];
 
       for (let i = 0; i < 18; i++) {
         const w = document.createElement("span");
         w.textContent = randomItem(words);
         w.style.left = Math.random() * 90 + "vw";
-        w.style.top = (20 + Math.random() * 100) + "vh";
+        w.style.top = (20 + Math.random() * 95) + "vh";
         w.style.fontSize = (14 + Math.random() * 18) + "px";
         w.style.animationDuration = (10 + Math.random() * 8) + "s";
-        w.style.animationDelay = (Math.random() * 6) + "s";
+        w.style.animationDelay = (Math.random() * 5) + "s";
         bgWords.appendChild(w);
       }
     }
 
-    async function tryPlayMusic() {
+    async function startMusic() {
       try {
+        bgMusic.volume = 1;
         await bgMusic.play();
-      } catch (e) {
-        // Si no hay música o el navegador la bloquea, no pasa nada.
-      }
+      } catch (e) {}
     }
 
     startBtn.addEventListener("click", async () => {
+      document.body.classList.add("gallery-mode");
+
       startBtn.animate(
         [
-          { transform: "scale(1)", filter: "brightness(1)" },
-          { transform: "scale(1.15)", filter: "brightness(1.2)" },
-          { transform: "scale(0.98)", filter: "brightness(1)" },
+          { transform: "scale(1)" },
+          { transform: "scale(1.15)" },
+          { transform: "scale(.98)" },
           { transform: "scale(1)" }
         ],
-        { duration: 700, easing: "ease" }
+        { duration: 680, easing: "ease" }
       );
 
-      document.body.animate(
-        [
-          { filter: "saturate(1)" },
-          { filter: "saturate(1.35)" },
-          { filter: "saturate(1.1)" }
-        ],
-        { duration: 900, easing: "ease" }
-      );
-
-      launchHearts(22);
-      launchStars(10);
-      await tryPlayMusic();
+      makeFloating("💖", 20);
+      makeFloating("✨", 10);
+      await startMusic();
 
       setTimeout(() => {
         switchScreen(screen2);
-        updatePhrase("Kami, te hice esto para sacarte una sonrisa bien bonita 💖");
-        showPopup("Entraste al modo especial de Kami ✨");
-      }, 520);
+        updateBox("Kami, ahora sí entraste a tu rincón especial 💖");
+        showPopup("Bienvenida chiquita ✨");
+      }, 450);
     });
 
     slangBtn.addEventListener("click", () => {
-      const text = randomItem(slangLines);
-      updatePhrase(text);
-      launchHearts(8);
-      showPopup("Uy 😏 salió una frase coquetona");
+      updateBox(randomItem(slangMessages));
+      makeFloating("💘", 8);
+      showPopup("Salió frase coquetona 😏");
     });
 
-    complimentBtn.addEventListener("click", () => {
-      const text = randomItem(surpriseMessages);
-      updatePhrase(text);
-      launchStars(7);
+    detailBtn.addEventListener("click", () => {
+      updateBox(randomItem(details));
+      makeFloating("🌸", 7);
       showPopup("Otro detallito para ti 💌");
     });
 
-    goGameBtn.addEventListener("click", () => {
+    heartRainBtn.addEventListener("click", () => {
+      makeFloating("💖", 26);
+      makeFloating("✨", 14);
+      showPopup("Lluvia de amor activada 💗");
+    });
+
+    gameBtn.addEventListener("click", () => {
       switchScreen(screen3);
       startGame();
-      launchHearts(10);
       showPopup("A jugar, Kami 🎮");
     });
 
-    backLoveBtn.addEventListener("click", () => {
+    backBtn.addEventListener("click", () => {
       stopGame();
       switchScreen(screen2);
-      showPopup("Volviste a las sorpresitas 💖");
+      showPopup("Volviste a tus sorpresitas 💖");
     });
 
-    restartGameBtn.addEventListener("click", () => {
+    restartBtn.addEventListener("click", () => {
       startGame();
       showPopup("Juego reiniciado 🔄");
     });
 
+    document.getElementById("pic1").addEventListener("click", () => {
+      updateBox(randomItem(picMessages.pic1));
+      showPopup("Tocaste una foto bonita 💕");
+      makeFloating("💖", 8);
+    });
+
+    document.getElementById("pic2").addEventListener("click", () => {
+      updateBox(randomItem(picMessages.pic2));
+      showPopup("Esa foto está bien linda ✨");
+      makeFloating("🖤", 8);
+    });
+
+    document.getElementById("pic3").addEventListener("click", () => {
+      updateBox(randomItem(picMessages.pic3));
+      showPopup("JAJA esta me gustó mucho 😆");
+      makeFloating("😂", 8);
+    });
+
     secretTap.addEventListener("click", () => {
       tapCount++;
-      secretTap.animate(
-        [
-          { transform: "scale(1)" },
-          { transform: "scale(1.1)" },
-          { transform: "scale(1)" }
-        ],
-        { duration: 230 }
-      );
-
       if (tapCount >= 5) {
         tapCount = 0;
         secretBanner.style.display = "block";
-        launchHearts(14);
-        launchStars(10);
-        showPopup("Secreto desbloqueado 🇲🇽");
+        makeFloating("🇲🇽", 12);
+        makeFloating("💚", 8);
+        makeFloating("🤍", 8);
+        makeFloating("❤️", 8);
+        showPopup("Secreto desbloqueado 👀");
         setTimeout(() => {
           secretBanner.style.display = "none";
         }, 2800);
       }
+    });
+
+    function makeDraggable(el) {
+      let startX = 0, startY = 0, initialX = 0, initialY = 0, dragging = false;
+
+      const onStart = (e) => {
+        dragging = true;
+        const touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        const rect = el.getBoundingClientRect();
+        initialX = rect.left;
+        initialY = rect.top;
+        el.style.cursor = "grabbing";
+      };
+
+      const onMove = (e) => {
+        if (!dragging) return;
+        e.preventDefault();
+        const touch = e.touches ? e.touches[0] : e;
+        let newX = initialX + (touch.clientX - startX);
+        let newY = initialY + (touch.clientY - startY);
+
+        const maxX = window.innerWidth - el.offsetWidth;
+        const maxY = window.innerHeight - el.offsetHeight;
+
+        newX = Math.max(0, Math.min(maxX, newX));
+        newY = Math.max(0, Math.min(maxY, newY));
+
+        el.style.left = newX + "px";
+        el.style.top = newY + "px";
+        el.style.bottom = "auto";
+        el.style.right = "auto";
+      };
+
+      const onEnd = () => {
+        dragging = false;
+        el.style.cursor = "grab";
+      };
+
+      el.addEventListener("mousedown", onStart);
+      el.addEventListener("touchstart", onStart, { passive: true });
+      window.addEventListener("mousemove", onMove, { passive: false });
+      window.addEventListener("touchmove", onMove, { passive: false });
+      window.addEventListener("mouseup", onEnd);
+      window.addEventListener("touchend", onEnd);
+    }
+
+    ["sticker1", "sticker2", "sticker3"].forEach(id => {
+      makeDraggable(document.getElementById(id));
     });
 
     function startGame() {
@@ -817,24 +841,19 @@
     function stopGame() {
       playing = false;
       clearInterval(gameInterval);
-      const existing = gameArea.querySelectorAll(".target");
-      existing.forEach(el => el.remove());
+      gameArea.innerHTML = "";
     }
 
     function spawnTarget(type) {
-      const size = 54;
+      const size = 56;
       const target = document.createElement("button");
-      target.className = "target " + (type === "good" ? "heart-target" : "bad-target");
-      target.setAttribute("aria-label", type === "good" ? "heart" : "bad");
+      target.className = "target " + (type === "good" ? "good" : "bad");
       target.textContent = type === "good" ? "💖" : "✨";
 
       const maxX = gameArea.clientWidth - size - 8;
       const maxY = gameArea.clientHeight - size - 8;
-      const x = 4 + Math.random() * maxX;
-      const y = 4 + Math.random() * maxY;
-
-      target.style.left = x + "px";
-      target.style.top = y + "px";
+      target.style.left = (4 + Math.random() * maxX) + "px";
+      target.style.top = (4 + Math.random() * maxY) + "px";
 
       target.addEventListener("click", () => {
         if (!playing) return;
@@ -842,56 +861,56 @@
         if (type === "good") {
           score++;
           scoreEl.textContent = score;
-          launchHearts(5);
+          makeFloating("💖", 5);
           showPopup(randomItem([
-            "Esooo, bien jugado 💖",
-            "Kami sumó amorcito ✨",
+            "Esooo Kami 💖",
+            "Bien jugado chiquita ✨",
             "Punto para la más bonita 💘"
           ]));
         } else {
           lives--;
           livesEl.textContent = lives;
-          launchStars(4);
+          makeFloating("✨", 4);
           showPopup(randomItem([
-            "Uy, esa no 😅",
-            "Casi, casi 👀",
-            "Esa era trampa ✨"
+            "Uy esa no 😭",
+            "Casi casi jaja",
+            "Esa era trampa 👀"
           ]));
         }
 
         target.remove();
-        checkGameState();
+        checkGame();
       });
 
       gameArea.appendChild(target);
 
       setTimeout(() => {
-        if (target.parentNode) {
-          target.remove();
-        }
+        if (target.parentNode) target.remove();
       }, 1200);
     }
 
-    function checkGameState() {
+    function checkGame() {
       if (score >= 12) {
         stopGame();
-        launchHearts(30);
-        updatePhrase("Kami ganó el mini juego porque está bien chingonaaa 💖🎉");
         switchScreen(screen2);
-        showPopup("Ganasteee, Kami 🏆💘");
+        updateBox("Kami ganó porque está bien pro y bien bonita 💖🏆");
+        makeFloating("🏆", 8);
+        makeFloating("💘", 16);
+        showPopup("Ganasteee Kami 🎉");
       }
 
       if (lives <= 0) {
         stopGame();
-        showPopup("Te gané por poquito 😌 inténtalo otra vez");
+        showPopup("Perdiste por poquito, inténtalo otra vez 😌");
       }
     }
 
+    typeWriter(intro);
     createBgWords();
-    typeWriter(introText);
+
     setInterval(() => {
-      launchHearts(2);
-    }, 2200);
+      makeFloating("💖", 2);
+    }, 2400);
   </script>
 </body>
 </html>
