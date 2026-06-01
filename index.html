@@ -1,7 +1,241 @@
-<img src="alba1.jpg">
-<img src="alba2.jpg">
-<img src="alba3.jpg">
-<img src="alba4.jpg">
-<audio id="music" controls>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💛 El Mundo de Albita 🌻</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- INTRO -->
+
+<section id="intro">
+
+  <div class="floating-sunflowers"></div>
+  <div class="floating-butterflies"></div>
+
+  <h1>💛 El Mundo de Albita 🌻</h1>
+
+  <h2>Las Aventuras de Albana 😂</h2>
+
+  <p>
+    Bienvenida Albita...
+    Aquí encontrarás fotos, secretos,
+    gatos, juegos, mariposas,
+    recuerdos y muchas cositas hechas para ti 💛
+  </p>
+
+  <button onclick="startAdventure()">
+    Entrar al Mundo de Albita 🌻
+  </button>
+
+</section>
+
+<!-- MAIN MENU -->
+
+<section id="menu" class="hidden">
+
+  <h2>¿Qué quieres explorar?</h2>
+
+  <div class="menu-grid">
+
+    <button onclick="openSection('book')">
+      📖 Libro Mágico
+    </button>
+
+    <button onclick="openSection('gallery')">
+      📸 Galería
+    </button>
+
+    <button onclick="openSection('games')">
+      🎮 Juegos
+    </button>
+
+    <button onclick="openSection('museum')">
+      🌻 Museo de Albita
+    </button>
+
+    <button onclick="openSection('court')">
+      😂 Corte de Albana
+    </button>
+
+    <button onclick="openSection('cats')">
+      🐱 Reino Gatuno
+    </button>
+
+    <button onclick="openSection('letters')">
+      💌 Cartas Secretas
+    </button>
+
+    <button onclick="openSection('dream')">
+      🌙 Mundo de Sueños
+    </button>
+
+  </div>
+
+</section>
+
+<!-- BOOK -->
+
+<section id="book" class="hidden">
+
+  <h2>📖 Libro Mágico</h2>
+
+  <div id="bookContent">
+
+    <h3>Página 1</h3>
+
+    <p>
+      Bienvenida Albita 💛
+    </p>
+
+  </div>
+
+  <button onclick="nextPage()">
+    ➡️ Siguiente Página
+  </button>
+
+</section>
+
+<!-- GALLERY -->
+
+<section id="gallery" class="hidden">
+
+  <h2>📸 Galería Especial</h2>
+
+  <div class="gallery-grid">
+
+    <img src="alba1.jpg" onclick="photoMessage(1)">
+    <img src="alba2.jpg" onclick="photoMessage(2)">
+    <img src="alba3.jpg" onclick="photoMessage(3)">
+    <img src="alba4.jpg" onclick="photoMessage(4)">
+    <img src="kami2.jpg" onclick="photoMessage(5)">
+
+  </div>
+
+</section>
+
+<!-- GAMES -->
+
+<section id="games" class="hidden">
+
+  <h2>🎮 Centro de Juegos</h2>
+
+  <button onclick="startSunflowerGame()">
+    🌻 Atrapa Girasoles
+  </button>
+
+  <button onclick="startCatGame()">
+    🐱 Encuentra al Gato
+  </button>
+
+  <button onclick="startButterflyGame()">
+    🦋 Caza Mariposas
+  </button>
+
+  <button onclick="startMemoryGame()">
+    💛 Memoria Albita
+  </button>
+
+</section>
+
+<!-- MUSEUM -->
+
+<section id="museum" class="hidden">
+
+  <h2>🌻 Museo de Albita</h2>
+
+  <div class="museum-item">
+    🐱 Rincón Gatuno
+  </div>
+
+  <div class="museum-item">
+    🌻 Colección de Girasoles
+  </div>
+
+  <div class="museum-item">
+    💛 Cosas que me recuerdan a ti
+  </div>
+
+</section>
+
+<!-- COURT -->
+
+<section id="court" class="hidden">
+
+  <h2>😂 Corte de Albana</h2>
+
+  <p>
+    Se te acusa de:
+  </p>
+
+  <ul>
+
+    <li>💛 Robar corazones</li>
+    <li>🐱 Amar demasiado a los gatos</li>
+    <li>😂 Hacer reír demasiado</li>
+    <li>🌻 Ser demasiado bonita</li>
+
+  </ul>
+
+</section>
+
+<!-- CAT KINGDOM -->
+
+<section id="cats" class="hidden">
+
+  <h2>🐱 Reino Gatuno</h2>
+
+  <p>
+    Los gatos tienen algo que decirte...
+  </p>
+
+</section>
+
+<!-- SECRET LETTERS -->
+
+<section id="letters" class="hidden">
+
+  <h2>💌 Cartas Secretas</h2>
+
+  <button onclick="openLetter(1)">
+    😊 Abrir Carta Feliz
+  </button>
+
+  <button onclick="openLetter(2)">
+    😔 Abrir Carta Triste
+  </button>
+
+  <button onclick="openLetter(3)">
+    💛 Abrir Carta Especial
+  </button>
+
+</section>
+
+<!-- DREAM WORLD -->
+
+<section id="dream" class="hidden">
+
+  <h2>🌙 Mundo de Sueños</h2>
+
+  <p>
+    Aquí termina el viaje...
+    o tal vez apenas comienza ✨
+  </p>
+
+</section>
+
+<!-- MUSIC -->
+
+<audio id="music" loop>
+
   <source src="Dos Soledades.mp3" type="audio/mpeg">
+
 </audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
