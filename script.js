@@ -1,3 +1,5 @@
+alert("script connected 💛");
+
 const openBookBtn = document.getElementById("openBookBtn");
 const landing = document.getElementById("landing");
 const introBook = document.getElementById("introBook");
