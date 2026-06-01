@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>💛 Para ti, chiquita Albita 🌻</title>
+<title>💛 Para Albita</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -13,49 +13,45 @@
 
 <body>
 
-<div id="sparkles"></div>
-<div id="butterflies"></div>
-<div id="clouds">
-  <div class="cloud">☁️</div>
-  <div class="cloud">☁️</div>
-  <div class="cloud">☁️</div>
-</div>
+<!-- PARTICLES -->
 
-<div id="sunflowerGarden">
-  🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻
-</div>
+<div id="particles"></div>
+
+<!-- MUSIC -->
+
+<button id="musicBtn">
+
+🎵 Nuestra Canción
+
+</button>
+
+<audio id="music">
+
+<source src="Dos Soledades.mp4" type="video/mp4">
+
+</audio>
+
+<!-- LANDING -->
+
 <section id="landing">
 
-<div class="hero-card">
+<div class="landingCard">
 
 <h1>
-💛 Para ti,<br>
-chiquita Albita 🌻
+
+💛 Para ti, chiquita Albita
+
 </h1>
 
-<p class="subtitle">
+<p>
 
-Un pequeño mundo lleno de
-mariposas, girasoles,
-gatos y sorpresas.
-
-✨ Hecho especialmente para ti ✨
+Una pequeña historia hecha especialmente para ti.
 
 </p>
 
-<div class="book-container">
+<button id="openBook">
 
-<div id="book">
-
-📖
-
-</div>
-
-</div>
-
-<button id="openBookBtn">
-
-💛 Abrir tu libro mágico 🌻
+📖 Abrir Libro
 
 </button>
 
@@ -63,28 +59,55 @@ gatos y sorpresas.
 
 </section>
 
-<section id="introBook" class="hidden">
+<!-- BOOK AREA -->
 
-<div class="book-page">
+<section id="bookSection" class="hidden">
 
-<h2>💛 Bienvenida Albita 🌻</h2>
+<div id="bookContainer">
+
+<div id="leftPage">
+
+<div id="pageContent">
+
+<h2>Bienvenida 💛</h2>
 
 <p>
 
-Si llegaste aquí...
-
-es porque alguien quiso hacer
-algo especial para ti.
-
-Y apenas estamos empezando.
-
-🦋
+Presiona la flecha para comenzar.
 
 </p>
 
-<button onclick="nextSection('gallery')">
+</div>
 
-Siguiente Página ➜
+</div>
+
+<div id="rightPage">
+
+<img id="pageImage" src="alba2.jpg">
+
+</div>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<div id="navigation">
+
+<button id="prevBtn">
+
+⬅️
+
+</button>
+
+<span id="pageNumber">
+
+Página 1 / 10
+
+</span>
+
+<button id="nextBtn">
+
+➡️
 
 </button>
 
@@ -92,117 +115,19 @@ Siguiente Página ➜
 
 </section>
 
-<section id="gallery" class="hidden">
+<!-- SECRET CAT -->
 
-<h2>📸 Nuestros Recuerdos</h2>
+<div id="secretCat">
 
-<div class="gallery-grid">
-
-<img src="alba1.jpg" onclick="showPhoto(1)">
-<img src="alba2.jpg" onclick="showPhoto(2)">
-<img src="alba3.jpg" onclick="showPhoto(3)">
-<img src="alba4.jpg" onclick="showPhoto(4)">
-<img src="kami2.jpg" onclick="showPhoto(5)">
+🐱
 
 </div>
 
-<button onclick="nextSection('letters')">
+<!-- MESSAGE POPUP -->
 
-💌 Continuar
-
-</button>
-
-</section>
-
-<section id="letters" class="hidden">
-
-<div class="glass-card">
-
-<h2>💌 Cartitas para Albita</h2>
-
-<button onclick="openLetter(1)">
-😊 Ábreme
-</button>
-
-<button onclick="openLetter(2)">
-🌻 Ábreme
-</button>
-
-<button onclick="openLetter(3)">
-🐱 Ábreme
-</button>
-
-<button onclick="nextSection('comingSoon')">
-
-➡️ Seguir
-
-</button>
+<div id="popup">
 
 </div>
-
-</section>
-
-<section id="comingSoon" class="hidden">\
-<hr>
-  
-<hr>
-
-<h3>🦋 Atrapa Mariposas</h3>
-
-<p>
-Atrapa 10 mariposas para desbloquear un premio.
-</p>
-
-<button onclick="startButterflyGame()">
-🦋 Comenzar Juego
-</button>
-
-<p id="butterflyScore">
-Mariposas: 0 / 10
-</p>
-<div class="glass-card">
-
-<h2>🌻 Más sorpresas vienen en camino...</h2>
-
-<p>
-
-Próximamente:
-<h3>🎡 Centro de Diversión</h3>
-
-<button onclick="spinWheel()">
-🎡 Girar Ruleta
-</button>
-
-<button onclick="toggleNightMode()">
-🌙 Modo Noche
-</button>
-
-<button onclick="showAchievements()">
-🏆 Logros
-</button>
-
-<p id="achievementCounter">
-Logros: 0
-</p>
-🦋 Campo de mariposas
-
-🐱 Reino gatuno
-
-🎮 Juegos
-
-🎡 Ruleta de sorpresas
-
-🌙 Modo noche
-
-🎆 Final especial
-
-</p>
-
-</div>
-
-</section>
-
-<div id="popup"></div>
 
 <script src="script.js"></script>
 
