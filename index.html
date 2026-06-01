@@ -1,237 +1,170 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💛 El Mundo de Albita 🌻</title>
 
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>💛 Para ti, chiquita Albita 🌻</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<!-- INTRO -->
+<div id="sparkles"></div>
+<div id="butterflies"></div>
 
-<section id="intro">
+<section id="landing">
 
-  <div class="floating-sunflowers"></div>
-  <div class="floating-butterflies"></div>
+<div class="hero-card">
 
-  <h1>💛 El Mundo de Albita 🌻</h1>
+<h1>
+💛 Para ti,<br>
+chiquita Albita 🌻
+</h1>
 
-  <h2>Las Aventuras de Albana 😂</h2>
+<p class="subtitle">
 
-  <p>
-    Bienvenida Albita...
-    Aquí encontrarás fotos, secretos,
-    gatos, juegos, mariposas,
-    recuerdos y muchas cositas hechas para ti 💛
-  </p>
+Un pequeño mundo lleno de
+mariposas, girasoles,
+gatos y sorpresas.
 
-  <button onclick="startAdventure()">
-    Entrar al Mundo de Albita 🌻
-  </button>
+✨ Hecho especialmente para ti ✨
 
-</section>
+</p>
 
-<!-- MAIN MENU -->
+<div class="book-container">
 
-<section id="menu" class="hidden">
+<div id="book">
 
-  <h2>¿Qué quieres explorar?</h2>
+📖
 
-  <div class="menu-grid">
+</div>
 
-    <button onclick="openSection('book')">
-      📖 Libro Mágico
-    </button>
+</div>
 
-    <button onclick="openSection('gallery')">
-      📸 Galería
-    </button>
+<button id="openBookBtn">
 
-    <button onclick="openSection('games')">
-      🎮 Juegos
-    </button>
+✨ Abrir tu regalito ✨
 
-    <button onclick="openSection('museum')">
-      🌻 Museo de Albita
-    </button>
+</button>
 
-    <button onclick="openSection('court')">
-      😂 Corte de Albana
-    </button>
-
-    <button onclick="openSection('cats')">
-      🐱 Reino Gatuno
-    </button>
-
-    <button onclick="openSection('letters')">
-      💌 Cartas Secretas
-    </button>
-
-    <button onclick="openSection('dream')">
-      🌙 Mundo de Sueños
-    </button>
-
-  </div>
+</div>
 
 </section>
 
-<!-- BOOK -->
+<section id="introBook" class="hidden">
 
-<section id="book" class="hidden">
+<div class="book-page">
 
-  <h2>📖 Libro Mágico</h2>
+<h2>💛 Bienvenida Albita 🌻</h2>
 
-  <div id="bookContent">
+<p>
 
-    <h3>Página 1</h3>
+Si llegaste aquí...
 
-    <p>
-      Bienvenida Albita 💛
-    </p>
+es porque alguien quiso hacer
+algo especial para ti.
 
-  </div>
+Y apenas estamos empezando.
 
-  <button onclick="nextPage()">
-    ➡️ Siguiente Página
-  </button>
+🦋
+
+</p>
+
+<button onclick="nextSection('gallery')">
+
+Siguiente Página ➜
+
+</button>
+
+</div>
 
 </section>
-
-<!-- GALLERY -->
 
 <section id="gallery" class="hidden">
 
-  <h2>📸 Galería Especial</h2>
+<h2>📸 Nuestros Recuerdos</h2>
 
-  <div class="gallery-grid">
+<div class="gallery-grid">
 
-    <img src="alba1.jpg" onclick="photoMessage(1)">
-    <img src="alba2.jpg" onclick="photoMessage(2)">
-    <img src="alba3.jpg" onclick="photoMessage(3)">
-    <img src="alba4.jpg" onclick="photoMessage(4)">
-    <img src="kami2.jpg" onclick="photoMessage(5)">
+<img src="alba1.jpg" onclick="showPhoto(1)">
+<img src="alba2.jpg" onclick="showPhoto(2)">
+<img src="alba3.jpg" onclick="showPhoto(3)">
+<img src="alba4.jpg" onclick="showPhoto(4)">
+<img src="kami2.jpg" onclick="showPhoto(5)">
 
-  </div>
+</div>
 
-</section>
+<button onclick="nextSection('letters')">
 
-<!-- GAMES -->
+💌 Continuar
 
-<section id="games" class="hidden">
-
-  <h2>🎮 Centro de Juegos</h2>
-
-  <button onclick="startSunflowerGame()">
-    🌻 Atrapa Girasoles
-  </button>
-
-  <button onclick="startCatGame()">
-    🐱 Encuentra al Gato
-  </button>
-
-  <button onclick="startButterflyGame()">
-    🦋 Caza Mariposas
-  </button>
-
-  <button onclick="startMemoryGame()">
-    💛 Memoria Albita
-  </button>
+</button>
 
 </section>
-
-<!-- MUSEUM -->
-
-<section id="museum" class="hidden">
-
-  <h2>🌻 Museo de Albita</h2>
-
-  <div class="museum-item">
-    🐱 Rincón Gatuno
-  </div>
-
-  <div class="museum-item">
-    🌻 Colección de Girasoles
-  </div>
-
-  <div class="museum-item">
-    💛 Cosas que me recuerdan a ti
-  </div>
-
-</section>
-
-<!-- COURT -->
-
-<section id="court" class="hidden">
-
-  <h2>😂 Corte de Albana</h2>
-
-  <p>
-    Se te acusa de:
-  </p>
-
-  <ul>
-
-    <li>💛 Robar corazones</li>
-    <li>🐱 Amar demasiado a los gatos</li>
-    <li>😂 Hacer reír demasiado</li>
-    <li>🌻 Ser demasiado bonita</li>
-
-  </ul>
-
-</section>
-
-<!-- CAT KINGDOM -->
-
-<section id="cats" class="hidden">
-
-  <h2>🐱 Reino Gatuno</h2>
-
-  <p>
-    Los gatos tienen algo que decirte...
-  </p>
-
-</section>
-
-<!-- SECRET LETTERS -->
 
 <section id="letters" class="hidden">
 
-  <h2>💌 Cartas Secretas</h2>
+<div class="glass-card">
 
-  <button onclick="openLetter(1)">
-    😊 Abrir Carta Feliz
-  </button>
+<h2>💌 Cartitas para Albita</h2>
 
-  <button onclick="openLetter(2)">
-    😔 Abrir Carta Triste
-  </button>
+<button onclick="openLetter(1)">
+😊 Ábreme
+</button>
 
-  <button onclick="openLetter(3)">
-    💛 Abrir Carta Especial
-  </button>
+<button onclick="openLetter(2)">
+🌻 Ábreme
+</button>
 
-</section>
+<button onclick="openLetter(3)">
+🐱 Ábreme
+</button>
 
-<!-- DREAM WORLD -->
+<button onclick="nextSection('comingSoon')">
 
-<section id="dream" class="hidden">
+➡️ Seguir
 
-  <h2>🌙 Mundo de Sueños</h2>
+</button>
 
-  <p>
-    Aquí termina el viaje...
-    o tal vez apenas comienza ✨
-  </p>
+</div>
 
 </section>
 
-<!-- MUSIC -->
+<section id="comingSoon" class="hidden">
 
-<audio id="music" loop>
-  <source src="Dos Soledades.mp3" type="audio/mpeg">
-</audio>
+<div class="glass-card">
+
+<h2>🌻 Más sorpresas vienen en camino...</h2>
+
+<p>
+
+Próximamente:
+
+🦋 Campo de mariposas
+
+🐱 Reino gatuno
+
+🎮 Juegos
+
+🎡 Ruleta de sorpresas
+
+🌙 Modo noche
+
+🎆 Final especial
+
+</p>
+
+</div>
+
+</section>
+
+<div id="popup"></div>
+
 <script src="script.js"></script>
+
 </body>
 </html>
