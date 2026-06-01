@@ -274,3 +274,89 @@ cat.remove();
 },8000);
 
 },15000);
+
+let butterflyScore = 0;
+let butterflyGameRunning = false;
+
+function startButterflyGame(){
+
+butterflyGameRunning = true;
+
+showPopup(
+"🦋 Atrapa las mariposas, Albita!"
+);
+
+}
+
+function spawnGameButterfly(){
+
+if(!butterflyGameRunning){
+return;
+}
+
+const b =
+document.createElement("div");
+
+b.innerHTML = "🦋";
+
+b.style.position = "fixed";
+
+b.style.left =
+Math.random()*90 + "vw";
+
+b.style.top =
+Math.random()*80 + "vh";
+
+b.style.fontSize = "50px";
+
+b.style.cursor = "pointer";
+
+b.style.zIndex = "99999";
+
+b.onclick = ()=>{
+
+butterflyScore++;
+
+document.getElementById(
+"butterflyScore"
+).innerText =
+"Mariposas: " +
+butterflyScore +
+" / 10";
+
+b.remove();
+
+if(butterflyScore >= 10){
+
+unlockAchievement(
+"🦋 Butterfly Catcher"
+);
+
+showPopup(
+"🏆 Premio desbloqueado!"
+);
+
+butterflyGameRunning = false;
+
+}
+
+};
+
+document.body.appendChild(b);
+
+setTimeout(()=>{
+
+if(b.parentNode){
+
+b.remove();
+
+}
+
+},5000);
+
+}
+
+setInterval(
+spawnGameButterfly,
+1500
+);
