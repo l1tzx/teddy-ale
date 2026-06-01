@@ -165,3 +165,110 @@ sparkle.remove();
 }
 
 setInterval(createSparkle,800);
+
+let achievements = 0;
+
+function unlockAchievement(name){
+
+achievements++;
+
+document.getElementById(
+"achievementCounter"
+).innerText =
+"Logros: " + achievements;
+
+showPopup("🏆 " + name);
+
+}
+
+function spinWheel(){
+
+const rewards = [
+
+"💛 Albita, eres increíble.",
+"🌻 Bonus girasol desbloqueado.",
+"😂 Albana fue declarada culpable de ser demasiado bonita.",
+"🐱 Los gatos aprobaron tu visita.",
+"🦋 Mariposa mágica encontrada."
+
+];
+
+const reward =
+rewards[
+Math.floor(
+Math.random()*rewards.length
+)
+];
+
+showPopup(reward);
+
+unlockAchievement("Ruleta Girada");
+
+}
+
+function toggleNightMode(){
+
+document.body.classList.toggle(
+"nightMode"
+);
+
+unlockAchievement(
+"Exploradora Nocturna"
+);
+
+}
+
+function showAchievements(){
+
+showPopup(
+"🏆 Logros desbloqueados: " +
+achievements
+);
+
+}
+
+/* Hidden Cat Hunt */
+
+setInterval(()=>{
+
+const cat =
+document.createElement("div");
+
+cat.innerHTML = "🐱";
+
+cat.style.position = "fixed";
+cat.style.left =
+Math.random()*90 + "vw";
+
+cat.style.top =
+Math.random()*80 + "vh";
+
+cat.style.fontSize = "50px";
+
+cat.style.cursor = "pointer";
+
+cat.style.zIndex = "9999";
+
+cat.onclick = ()=>{
+
+unlockAchievement(
+"Cat Whisperer"
+);
+
+cat.remove();
+
+};
+
+document.body.appendChild(cat);
+
+setTimeout(()=>{
+
+if(cat.parentNode){
+
+cat.remove();
+
+}
+
+},8000);
+
+},15000);
