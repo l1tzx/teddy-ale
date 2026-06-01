@@ -223,3 +223,9 @@ particle.remove();
 }
 
 setInterval(createParticle,700);
+
+console.log(openBook);
+console.log(prevBtn);
+console.log(nextBtn);
+console.log(secretCat);
+console.log(musicBtn);
