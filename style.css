@@ -336,3 +336,17 @@ padding:25px;
 }
 
 }
+
+.nightMode{
+
+background:
+linear-gradient(
+135deg,
+#07111f,
+#10243e,
+#162d4a
+);
+
+color:white;
+
+}
