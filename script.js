@@ -21,7 +21,9 @@ openBookBtn.addEventListener("click",()=>{
 landing.classList.add("hidden");
 introBook.classList.remove("hidden");
 
-showPopup("💛 Bienvenida Albita 🌻");
+showPopup(
+"🦋 Las mariposas te dieron la bienvenida, Albita 💛"
+);
 
 });
 
