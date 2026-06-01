@@ -1,150 +1,166 @@
-let currentPage = 1;
+const openBookBtn = document.getElementById("openBookBtn");
+const landing = document.getElementById("landing");
+const introBook = document.getElementById("introBook");
 
-const pages = [
-`💛 Bienvenida Albita. Este pequeño mundo fue hecho especialmente para ti 🌻`,
+const popup = document.getElementById("popup");
 
-`🌻 Albana, oficialmente se te acusa de ser demasiado bonita y de robar corazones.`,
+function showPopup(text){
 
-`💛 Cosas que amo de ti:
-- Tu sonrisa
-- Tu forma de ser
-- Tu personalidad
-- Lo mucho que amas a los gatos 🐱`,
+popup.innerText = text;
+popup.style.display = "block";
 
-`😂 Dato científico:
-Cada vez que Albita sonríe, alguien se enamora.`,
+setTimeout(()=>{
+popup.style.display = "none";
+},3000);
 
-`🦋 Si llegaste hasta aquí, significa que eres curiosa. Y sí, hay más secretos escondidos.`,
-
-`🐱 El Consejo Supremo de los Gatos ha decidido que eres adorable.`,
-
-`💌 Gracias por explorar este pequeño mundo. Todavía quedan sorpresas por descubrir.`
-];
-
-function startAdventure(){
-document.getElementById("intro").classList.add("hidden");
-document.getElementById("menu").classList.remove("hidden");
 }
 
-function openSection(sectionId){
+openBookBtn.addEventListener("click",()=>{
+
+landing.classList.add("hidden");
+introBook.classList.remove("hidden");
+
+showPopup("💛 Bienvenida Albita 🌻");
+
+});
+
+function nextSection(id){
 
 document.querySelectorAll("section").forEach(section=>{
 section.classList.add("hidden");
 });
 
-document.getElementById(sectionId).classList.remove("hidden");
-}
+document.getElementById(id).classList.remove("hidden");
 
-function nextPage(){
-
-currentPage++;
-
-if(currentPage > pages.length){
-currentPage = 1;
-}
-
-document.getElementById("bookContent").innerHTML = `
-<h3>Página ${currentPage}</h3>
-<p>${pages[currentPage-1]}</p>
-`;
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
 
-function photoMessage(photo){
+function showPhoto(photo){
 
-if(photo === 1){
-alert("💛 Una de mis fotos favoritas. Aquí empezó una de las mejores historias.");
+if(photo===1){
+
+showPopup(
+"💛 Una de mis fotos favoritas. Aquí empezó una historia muy bonita."
+);
+
 }
 
-if(photo === 2){
-alert("🌻 No manches Albita, saliste bien bonita aquí.");
+if(photo===2){
+
+showPopup(
+"🌻 No manches Albita, saliste bien bonita aquí."
+);
+
 }
 
-if(photo === 3){
-alert("🦋 Advertencia: demasiada belleza en una sola foto.");
+if(photo===3){
+
+showPopup(
+"🦋 Advertencia: demasiada belleza en una sola imagen."
+);
+
 }
 
-if(photo === 4){
-alert("👶💛 Esta foto siempre me hace sonreír.");
+if(photo===4){
+
+showPopup(
+"👶💛 Esta foto siempre me hace sonreír."
+);
+
 }
 
-if(photo === 5){
-alert("😎 Aquí está el mero mero.");
+if(photo===5){
+
+showPopup(
+"😎 Aquí está el mero mero."
+);
+
 }
 
 }
 
 function openLetter(number){
 
-if(number === 1){
-alert("😊 Espero que hoy tengas un día increíble, Albita.");
-}
+if(number===1){
 
-if(number === 2){
-alert("💛 Si algún día estás triste, recuerda que eres muy especial.");
-}
-
-if(number === 3){
-alert("🌻 Gracias por ser tú.");
-}
+showPopup(
+"😊 Espero que este detallito te saque una sonrisa."
+);
 
 }
 
-function startSunflowerGame(){
-alert("🌻 Próximamente: Atrapa los Girasoles.");
+if(number===2){
+
+showPopup(
+"🌻 Gracias por ser una persona tan especial."
+);
+
 }
 
-function startCatGame(){
-alert("🐱 Próximamente: Encuentra al Gato.");
+if(number===3){
+
+showPopup(
+"🐱 El consejo de los gatos ha decidido que eres adorable."
+);
+
 }
 
-function startButterflyGame(){
-alert("🦋 Próximamente: Caza Mariposas.");
 }
 
-function startMemoryGame(){
-alert("💛 Próximamente: Memoria Albita.");
-}
+/* BUTTERFLIES */
 
 function createButterfly(){
 
-const butterfly = document.createElement("div");
+const butterfly =
+document.createElement("div");
 
-butterfly.classList.add("floating-butterfly");
+butterfly.classList.add("butterfly");
 
 butterfly.innerHTML = "🦋";
 
-butterfly.style.left = Math.random()*100+"vw";
+butterfly.style.left =
+Math.random()*100+"vw";
 
 butterfly.style.animationDuration =
-(8 + Math.random()*10)+"s";
+(8+Math.random()*8)+"s";
 
 document.body.appendChild(butterfly);
 
 setTimeout(()=>{
 butterfly.remove();
-},15000);
+},16000);
 
 }
 
-setInterval(createButterfly,3000);
+setInterval(createButterfly,2000);
 
-function createCat(){
+/* SPARKLES */
 
-const cat = document.createElement("div");
+function createSparkle(){
 
-cat.classList.add("floating-cat");
+const sparkle =
+document.createElement("div");
 
-cat.innerHTML="🐱";
+sparkle.classList.add("sparkle");
 
-document.body.appendChild(cat);
+sparkle.innerHTML = "✨";
+
+sparkle.style.left =
+Math.random()*100+"vw";
+
+sparkle.style.bottom =
+Math.random()*100+"px";
+
+document.body.appendChild(sparkle);
 
 setTimeout(()=>{
-cat.remove();
-},22000);
+sparkle.remove();
+},6000);
 
 }
 
-setInterval(createCat,15000);
-
-alert("Script loaded 💛");
+setInterval(createSparkle,800);
