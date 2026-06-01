@@ -1,362 +1,225 @@
-
-const openBookBtn = document.getElementById("openBookBtn");
 const landing = document.getElementById("landing");
-const introBook = document.getElementById("introBook");
+const bookSection = document.getElementById("bookSection");
+
+const openBook = document.getElementById("openBook");
+
+const pageContent = document.getElementById("pageContent");
+const pageImage = document.getElementById("pageImage");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+const pageNumber = document.getElementById("pageNumber");
 
 const popup = document.getElementById("popup");
+
+const musicBtn = document.getElementById("musicBtn");
+const music = document.getElementById("music");
+
+const secretCat = document.getElementById("secretCat");
+
+let currentPage = 0;
+
+/* PAGES */
+
+const pages = [
+
+{
+title:"Bienvenida 💛",
+text:"Hola Albita. Este pequeño libro fue hecho especialmente para ti. Espero que te saque una sonrisa 🌻",
+image:"alba2.jpg"
+},
+
+{
+title:"Capítulo 1 🌻",
+text:"Oye Albita... ¿sabías que eres de esas personas que pueden alegrarme el día con solo aparecer? 😒💛",
+image:"alba2.jpg"
+},
+
+{
+title:"Capítulo 2 🦋",
+text:"Tengo una teoría. Creo que naciste para hacerme perder la concentración. Y sí... funciona demasiado bien 😂",
+image:"alba3.jpg"
+},
+
+{
+title:"Capítulo 3 😎",
+text:"Aquí está el mero mero. El que hizo este libro porque cierta Albana ocupa demasiado espacio en su cabeza 💛",
+image:"kami2.jpg"
+},
+
+{
+title:"Capítulo 4 💛",
+text:"A veces veo nuestras fotos y pienso: no manches... ¿cómo terminé teniendo tanta suerte? 🌻",
+image:"alba1.jpg"
+},
+
+{
+title:"Capítulo 5 👶",
+text:"Esta foto siempre me hace sonreír. También me hace imaginar muchas cosas bonitas 💛",
+image:"alba4.jpg"
+},
+
+{
+title:"Carta Secreta 💌",
+text:"Gracias por escucharme. Gracias por aguantarme. Gracias por ser tú.",
+image:"alba2.jpg"
+},
+
+{
+title:"Datos de Albana 😂",
+text:"Se te acusa oficialmente de: robar corazones, ser demasiado bonita y hacerme reír demasiado.",
+image:"alba3.jpg"
+},
+
+{
+title:"Lo que más me gusta de ti 🌻",
+text:"Tu sonrisa, tu forma de ser, tu corazón y la forma en que haces especiales los días normales.",
+image:"alba1.jpg"
+},
+
+{
+title:"Final 💛",
+text:"Gracias por leer hasta aquí. Este pequeño libro fue hecho pensando en ti. Con cariño, Teddy 🌻",
+image:"alba4.jpg"
+}
+
+];
+
+/* OPEN BOOK */
+
+openBook.addEventListener("click",()=>{
+
+landing.classList.add("hidden");
+bookSection.classList.remove("hidden");
+
+loadPage();
+
+});
+
+/* LOAD PAGE */
+
+function loadPage(){
+
+pageContent.innerHTML = `
+<h2>${pages[currentPage].title}</h2>
+<p>${pages[currentPage].text}</p>
+`;
+
+pageImage.src = pages[currentPage].image;
+
+pageNumber.innerText =
+`Página ${currentPage+1} / ${pages.length}`;
+
+}
+
+/* NAVIGATION */
+
+nextBtn.addEventListener("click",()=>{
+
+if(currentPage < pages.length-1){
+
+currentPage++;
+
+loadPage();
+
+}
+
+});
+
+prevBtn.addEventListener("click",()=>{
+
+if(currentPage > 0){
+
+currentPage--;
+
+loadPage();
+
+}
+
+});
+
+/* POPUP */
 
 function showPopup(text){
 
 popup.innerText = text;
+
 popup.style.display = "block";
 
 setTimeout(()=>{
+
 popup.style.display = "none";
+
 },3000);
 
 }
 
-openBookBtn.addEventListener("click",()=>{
+/* MUSIC */
 
-landing.classList.add("hidden");
-introBook.classList.remove("hidden");
+let playing = false;
+
+musicBtn.addEventListener("click",()=>{
+
+if(!playing){
+
+music.play();
+
+musicBtn.innerText =
+"⏸️ Pausar Música";
+
+playing = true;
+
+}else{
+
+music.pause();
+
+musicBtn.innerText =
+"🎵 Nuestra Canción";
+
+playing = false;
+
+}
+
+});
+
+/* SECRET CAT */
+
+secretCat.addEventListener("click",()=>{
 
 showPopup(
-"🦋 Las mariposas te dieron la bienvenida, Albita 💛"
+"🐱 Encontraste al michi secreto de Albita"
 );
 
 });
 
-function nextSection(id){
+/* PARTICLES */
 
-document.querySelectorAll("section").forEach(section=>{
-section.classList.add("hidden");
-});
+function createParticle(){
 
-document.getElementById(id).classList.remove("hidden");
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-function showPhoto(photo){
-
-if(photo===1){
-
-showPopup(
-"💛 Una de mis fotos favoritas. Aquí empezó una historia muy bonita."
-);
-
-}
-
-if(photo===2){
-
-showPopup(
-"🌻 No manches Albita, saliste bien bonita aquí."
-);
-
-}
-
-if(photo===3){
-
-showPopup(
-"🦋 Advertencia: demasiada belleza en una sola imagen."
-);
-
-}
-
-if(photo===4){
-
-showPopup(
-"👶💛 Esta foto siempre me hace sonreír."
-);
-
-}
-
-if(photo===5){
-
-showPopup(
-"😎 Aquí está el mero mero."
-);
-
-}
-
-}
-
-function openLetter(number){
-
-if(number===1){
-
-showPopup(
-"😊 Espero que este detallito te saque una sonrisa."
-);
-
-}
-
-if(number===2){
-
-showPopup(
-"🌻 Gracias por ser una persona tan especial."
-);
-
-}
-
-if(number===3){
-
-showPopup(
-"🐱 El consejo de los gatos ha decidido que eres adorable."
-);
-
-}
-
-}
-
-/* BUTTERFLIES */
-
-function createButterfly(){
-
-const butterfly =
+const particle =
 document.createElement("div");
 
-butterfly.classList.add("butterfly");
+particle.classList.add("particle");
 
-butterfly.innerHTML = "🦋";
+particle.innerHTML =
+Math.random() > .5 ? "✨" : "🦋";
 
-butterfly.style.left =
-Math.random()*100+"vw";
+particle.style.left =
+Math.random()*100 + "vw";
 
-butterfly.style.animationDuration =
-(8+Math.random()*8)+"s";
+particle.style.animationDuration =
+(8 + Math.random()*10) + "s";
 
-document.body.appendChild(butterfly);
-
-setTimeout(()=>{
-butterfly.remove();
-},16000);
-
-}
-
-setInterval(createButterfly,2000);
-
-/* SPARKLES */
-
-function createSparkle(){
-
-const sparkle =
-document.createElement("div");
-
-sparkle.classList.add("sparkle");
-
-sparkle.innerHTML = "✨";
-
-sparkle.style.left =
-Math.random()*100+"vw";
-
-sparkle.style.bottom =
-Math.random()*100+"px";
-
-document.body.appendChild(sparkle);
-
-setTimeout(()=>{
-sparkle.remove();
-},6000);
-
-}
-
-setInterval(createSparkle,800);
-
-let achievements = 0;
-
-function unlockAchievement(name){
-
-achievements++;
-
-document.getElementById(
-"achievementCounter"
-).innerText =
-"Logros: " + achievements;
-
-showPopup("🏆 " + name);
-
-}
-
-function spinWheel(){
-
-const rewards = [
-
-"💛 Albita, eres increíble.",
-"🌻 Bonus girasol desbloqueado.",
-"😂 Albana fue declarada culpable de ser demasiado bonita.",
-"🐱 Los gatos aprobaron tu visita.",
-"🦋 Mariposa mágica encontrada."
-
-];
-
-const reward =
-rewards[
-Math.floor(
-Math.random()*rewards.length
-)
-];
-
-showPopup(reward);
-
-unlockAchievement("Ruleta Girada");
-
-}
-
-function toggleNightMode(){
-
-document.body.classList.toggle(
-"nightMode"
-);
-
-unlockAchievement(
-"Exploradora Nocturna"
-);
-
-}
-
-function showAchievements(){
-
-showPopup(
-"🏆 Logros desbloqueados: " +
-achievements
-);
-
-}
-
-/* Hidden Cat Hunt */
-
-setInterval(()=>{
-
-const cat =
-document.createElement("div");
-
-cat.innerHTML = "🐱";
-
-cat.style.position = "fixed";
-cat.style.left =
-Math.random()*90 + "vw";
-
-cat.style.top =
-Math.random()*80 + "vh";
-
-cat.style.fontSize = "50px";
-
-cat.style.cursor = "pointer";
-
-cat.style.zIndex = "9999";
-
-cat.onclick = ()=>{
-
-unlockAchievement(
-"Cat Whisperer"
-);
-
-cat.remove();
-
-};
-
-document.body.appendChild(cat);
+document.getElementById("particles")
+.appendChild(particle);
 
 setTimeout(()=>{
 
-if(cat.parentNode){
+particle.remove();
 
-cat.remove();
-
-}
-
-},8000);
-
-},15000);
-
-let butterflyScore = 0;
-let butterflyGameRunning = false;
-
-function startButterflyGame(){
-
-butterflyGameRunning = true;
-
-showPopup(
-"🦋 Atrapa las mariposas, Albita!"
-);
+},18000);
 
 }
 
-function spawnGameButterfly(){
-
-if(!butterflyGameRunning){
-return;
-}
-
-const b =
-document.createElement("div");
-
-b.innerHTML = "🦋";
-
-b.style.position = "fixed";
-
-b.style.left =
-Math.random()*90 + "vw";
-
-b.style.top =
-Math.random()*80 + "vh";
-
-b.style.fontSize = "50px";
-
-b.style.cursor = "pointer";
-
-b.style.zIndex = "99999";
-
-b.onclick = ()=>{
-
-butterflyScore++;
-
-document.getElementById(
-"butterflyScore"
-).innerText =
-"Mariposas: " +
-butterflyScore +
-" / 10";
-
-b.remove();
-
-if(butterflyScore >= 10){
-
-unlockAchievement(
-"🦋 Butterfly Catcher"
-);
-
-showPopup(
-"🏆 Premio desbloqueado!"
-);
-
-butterflyGameRunning = false;
-
-}
-
-};
-
-document.body.appendChild(b);
-
-setTimeout(()=>{
-
-if(b.parentNode){
-
-b.remove();
-
-}
-
-},5000);
-
-}
-
-setInterval(
-spawnGameButterfly,
-1500
-);
+setInterval(createParticle,700);
