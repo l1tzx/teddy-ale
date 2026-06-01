@@ -146,3 +146,5 @@ cat.remove();
 }
 
 setInterval(createCat,15000);
+
+alert("Script loaded 💛");
